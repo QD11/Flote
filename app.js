@@ -1,8 +1,20 @@
 const today = new Date().toISOString().slice(0, 10)
 const date = document.querySelector('#leave-date')
 const flightContainer = document.querySelector('#flight-render-container')
-date.textContent = today
+const quoteForm = document.getElementById('flight-form')
+const outboundAirport = document.getElementById('outbound-terminal')
+const arrivalAirport = document.getElementById('arrival-terminal')
+const leaveDate = document.getElementById('leave-date')
+leaveDate.value = today
+leaveDate.min = today
+const returnDate = document.getElementById('return-date')
 
+quoteForm.addEventListener('submit', event => {
+    event.preventDefault()
+    renderInputs(outboundAirport.value, arrivalAirport.value, leaveDate.value, returnDate.value)
+})
+
+date.textContent = today
 
 
 function renderInputs(origin, destination, departingDate, returnDate = '') {
@@ -28,6 +40,9 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 
 
 function renderQuotes(data){
+    while (flightContainer.firstChild) {
+        flightContainer.removeChild(flightContainer.firstChild);
+    }
     data.Quotes.forEach(quote => {
         //min pirce
         //carrierid
@@ -61,4 +76,4 @@ function renderQuotes(data){
 }
 
 
-renderInputs('IAH','LAX','anytime','')
+//renderInputs('IAH','LAX','anytime','')
