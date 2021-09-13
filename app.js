@@ -1,15 +1,7 @@
 const today = new Date().toISOString().slice(0, 10)
-<<<<<<< HEAD
-
-
 const date = document.querySelector('#leave-date')
 date.textContent = today
 
-console.log(date)
-=======
-const date = document.querySelector('#leave-date')
-date.textContent = today
-console.log(date)
 
 
 function renderInputs(origin, destination, departingDate, returnDate = '') {
@@ -37,5 +29,4 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
     });
 }
 
-renderInputs('IAH','LAX','2021-09-13')
->>>>>>> ca66a997a5c3a31c7a320cac01199f644f25a82d
+renderInputs('IAH','LAX','2021-09-13','')
