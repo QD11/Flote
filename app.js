@@ -1,5 +1,6 @@
 const today = new Date().toISOString().slice(0, 10)
 const date = document.querySelector('#leave-date')
+const flightContainer = document.querySelector('#flight-render-container')
 date.textContent = today
 
 
@@ -19,19 +20,45 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 	}
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => renderQuotes(data))
     .catch(err => {
 	console.error(err);
     });
 }
 
-<<<<<<< HEAD
-renderInputs('IAH','LAX','2021-09-13','')
-=======
-<<<<<<< HEAD
-renderInputs('IAH','LAX','2021-09-13')
-=======
-renderInputs('IAH','LAX','2021-09-13')
->>>>>>> ca66a997a5c3a31c7a320cac01199f644f25a82d
->>>>>>> f25813ba40cd80460275010d9cb749dba11188ca
->>>>>>> c3b2b6b3404c760807926754ad749a0f3dc99e6a
+
+function renderQuotes(data){
+    data.Quotes.forEach(quote => {
+        //min pirce
+        //carrierid
+        //departure date / time
+        //direct - true/false
+        console.log(quote)
+        const flightPrice = quote.MinPrice
+        const flightCarrier = quote.OutboundLeg.CarrierIds[0]
+        const flightDep = quote.OutboundLeg.DepartureDate
+        const flightTime = flightDep.slice(10)
+        const flightDirect = quote.Direct
+
+        const flightCard = document.createElement('div')
+        flightCard.className = 'flight-card'
+
+        const displayPrice = document.createElement('h3')
+        displayPrice.textContent = `$${flightPrice}`
+
+        const displayDeparture = document.createElement('p')
+        displayDeparture.textContent = flightDep
+        
+        const displayTime = document.createElement('li')
+        displayTime.textContent = flightTime
+
+        const displayDirect = document.createElement('li')
+        displayDirect.textContent = flightDirect
+
+        flightCard.append(displayPrice, displayDeparture, displayTime, displayDirect)
+        flightContainer.appendChild(flightCard)
+    })
+}
+
+
+renderInputs('IAH','LAX','anytime','')
