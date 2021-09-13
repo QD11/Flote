@@ -3,9 +3,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="app.js"></script>
+    <title>Flight Quote</title>
 </head>
 <body>
-    
+    <div id=flight-form-container>
+        <!-- flight-form container -->
+        <form id='flight-form'>
+            <input type="text" name="outbount-terminal" id="outbount-terminal">
+            <input type="text" name="return-terminal" id="return-terminal">
+            <input type="date" name="leave-date" id="leave-date" value="2018-07-22"
+            min="2021-09-13">
+            <input type="date" name='arrive-date' id='arrive-date'>
+            <button id='quote-bttn'>Get Quotes</button>
+        </form>
+    </div>
+    <!-- we render flight quotes here for now -->
+    <div id=flight-render-container> 
+        <div id=quote-card>
+            <!-- Cards will be pushed here -->
+        </div>
+    </div>
+    <div>
+
+    </div>
 </body>
 </html>
