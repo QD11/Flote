@@ -21,7 +21,7 @@ fetch(URL_MAIN)
 .then(data => {
     data.forEach(element => {
         console.log(element)
-        createCard(element.image, element.name, element.price, element.departure, element.direct, 'Delete Quote', '', saveQuoteContainer)
+        createCard(element.image, element.cities, element.name, element.price, element.departure, element.direct, 'Delete Quote', '', saveQuoteContainer)
     })
 })
 
@@ -65,6 +65,7 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 
 
 function renderQuotes(data, returnDate){
+    console.log(data)
     while (flightContainer.firstChild) {
         flightContainer.removeChild(flightContainer.firstChild);
     }
@@ -89,6 +90,8 @@ function renderQuotes(data, returnDate){
         // console.log(carrier)
         carrierArr.push(carrier)
     }
+    const cityDep =  data.Places[0].CityName
+    const cityArr = data.Places[1].CityName
     
     data.Quotes.forEach(quote => {
         // console.log(quote)
@@ -130,6 +133,9 @@ function renderQuotes(data, returnDate){
         const flightCard = document.createElement('div')
         flightCard.className = 'flight-card'
 
+        const flightCities = document.createElement('h1')
+        flightCities.textContent = cityDep + ' to ' + cityArr
+
         const flightNameDep = document.createElement('h1')
         flightNameDep.textContent = flightIdDep
 
@@ -159,6 +165,7 @@ function renderQuotes(data, returnDate){
 
             const flights = {
                 name : flightNameDep.textContent,
+                cities: flightCities.textContent,
                 image : flightImg.src,
                 price : displayPrice.textContent,
                 departure : displayDeparture.textContent,
@@ -181,10 +188,10 @@ function renderQuotes(data, returnDate){
         }
 
         if (returnDate){
-            flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
+            flightCard.append(flightImg, flightCities, flightNameDep, displayPrice, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
         }
         else {
-            flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, displayDirect, saveBttn)
+            flightCard.append(flightImg, flightCities, flightNameDep, displayPrice, displayDeparture, displayDirect, saveBttn)
         }
         
         flightContainer.appendChild(flightCard)
@@ -192,10 +199,13 @@ function renderQuotes(data, returnDate){
     })
 }}
 
-function createCard(image, nameDep, price, departure, direct, bttn, bttnfunc, parentNode) {
+function createCard(image, cities, nameDep, price, departure, direct, bttn, bttnfunc, parentNode) {
     console.log('hi')
     const flightCard = document.createElement('div')
     flightCard.className = 'flight-card'
+
+    const flightCities = document.createElement('h1')
+    flightCities.textContent = cities
 
     const displayDeparture = document.createElement('h1')
     displayDeparture.textContent = departure
@@ -214,11 +224,11 @@ function createCard(image, nameDep, price, departure, direct, bttn, bttnfunc, pa
     const displayDirect = document.createElement('p')
     displayDirect.textContent = direct
 
-    const buttton = document.createElement('button')
-    buttton.textContent = bttn
+    const btttn = document.createElement('button')
+    btttn.textContent = bttn
     // bttn.addEventListener('click', bttnfunc)
 
-    flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, displayDirect, bttn)
+    flightCard.append(flightImg, flightCities, flightNameDep, displayPrice, displayDeparture, displayDirect, bttn)
     parentNode.appendChild(flightCard)
 }
 

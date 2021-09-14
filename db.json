@@ -38,76 +38,31 @@
   ],
   "userquotes": [
     {
-      "name": "Viva Aerobus",
+      "name": "Spirit Airlines",
+      "cities": "Houston to Los Angeles",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $289",
-      "departure": "Departure: 2022-08-25",
-      "direct": "Connecting",
-      "id": 11
-    },
-    {
-      "name": "United",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $190",
-      "departure": "Departure: 2022-07-01",
-      "direct": "Direct Flight",
-      "id": 12
-    },
-    {
-      "name": "United",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $169",
-      "departure": "Departure: 2022-05-13",
-      "direct": "Direct Flight",
-      "id": 13
-    },
-    {
-      "name": "Alaska Airlines",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $165",
+      "price": "Price: $121",
       "departure": "Departure: 2021-09-14",
-      "direct": "Direct Flight",
-      "id": 14
+      "direct": "Flight Stops",
+      "id": 1
     },
     {
       "name": "Spirit Airlines",
+      "cities": "Houston to Los Angeles",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $163",
+      "price": "Price: $122",
       "departure": "Departure: 2021-09-14",
-      "direct": "Connecting",
-      "id": 15
+      "direct": "Flight Stops",
+      "id": 2
     },
     {
       "name": "Alaska Airlines",
+      "cities": "Houston to Los Angeles",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $165",
+      "price": "Price: $278",
       "departure": "Departure: 2021-09-14",
       "direct": "Direct Flight",
-      "id": 16
-    },
-    {
-      "name": "Viva Aerobus",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $289",
-      "departure": "Departure: 2022-08-25",
-      "direct": "Connecting",
-      "id": 17
-    },
-    {
-      "name": "United",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $190",
-      "departure": "Departure: 2022-07-01",
-      "direct": "Direct Flight",
-      "id": 18
-    },
-    {
-      "name": "Alaska Airlines",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $165",
-      "departure": "Departure: 2021-09-14",
-      "direct": "Direct Flight",
-      "id": 19
+      "id": 3
     }
   ]
 }
