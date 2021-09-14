@@ -24,7 +24,8 @@
     float: left;
     text-align: center;
     width: 540px;
-    height: 214px;
+    padding: 10px;
+    /* height: 214px; */
     border-radius: 3px;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -38,4 +39,9 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .flight-image{
+    width: 100px;
+    height: 100px;
   }

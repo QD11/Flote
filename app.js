@@ -8,7 +8,7 @@ const leaveDate = document.getElementById('leave-date')
 leaveDate.value = today
 leaveDate.min = today
 const returnDate = document.getElementById('return-date')
-let carrierId; 
+// let carrierArr = []
 
 quoteForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -41,29 +41,49 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 
 
 function renderQuotes(data){
+    let carrierArr = []
 
-    // data.Carriers.forEach(carrier => checkFlight(carrier))
+    data.Carriers.forEach(carrier => checkFlight(carrier))
 
-    // // function checkFlight(carrier){
-    // //     //later
-    // // }
+    console.log(carrierArr)
+   
+    function checkFlight(carrier){
+        // console.log(carrier)
+        carrierArr.push(carrier)
+    }
     
     while (flightContainer.firstChild) {
         flightContainer.removeChild(flightContainer.firstChild);
     }
     data.Quotes.forEach(quote => {
-        console.log(quote)
+        // console.log(quote)
 
-      
+        
         const flightPrice = quote.MinPrice
-        const flightId = quote.OutboundLeg.CarrierIds[0]
+        let flightId = quote.OutboundLeg.CarrierIds[0]
+        console.log(flightId)
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightTime = flightDep.slice(10)
         const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
 
-
+        carrierArr.forEach(elem => {
+            console.log(elem.CarrierId)
+            if(flightId === elem.CarrierId) {
+               flightId = elem.Name    
+               console.log(flightId)        
+            }
+        })
+       
+        
         const flightCard = document.createElement('div')
         flightCard.className = 'flight-card'
+
+        const flightName = document.createElement('h1')
+        flightName.textContent = flightId
+
+        const flightImg = document.createElement('img')
+        flightImg.src = 'https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200'
+        flightImg.className = 'flight-image'
 
         const displayPrice = document.createElement('h2')
         displayPrice.className = 'airline'
@@ -78,7 +98,7 @@ function renderQuotes(data){
         const displayDirect = document.createElement('p')
         displayDirect.textContent = flightDirect 
 
-        flightCard.append(displayPrice, displayDeparture, displayTime, displayDirect)
+        flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayTime, displayDirect)
         flightContainer.appendChild(flightCard)
 
       
