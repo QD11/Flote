@@ -38,31 +38,26 @@
   ],
   "userquotes": [
     {
-      "name": "Spirit Airlines",
+      "nameDep": "Spirit Airlines",
+      "nameRet": "",
       "cities": "Houston to Los Angeles",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $121",
+      "price": "Price: $297",
       "departure": "Departure: 2021-09-14",
+      "arrival": "",
       "direct": "Flight Stops",
       "id": 1
     },
     {
-      "name": "Spirit Airlines",
+      "nameDep": "Spirit Airlines",
+      "nameRet": "",
       "cities": "Houston to Los Angeles",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $122",
+      "price": "Price: $298",
       "departure": "Departure: 2021-09-14",
+      "arrival": "",
       "direct": "Flight Stops",
       "id": 2
-    },
-    {
-      "name": "Alaska Airlines",
-      "cities": "Houston to Los Angeles",
-      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
-      "price": "Price: $278",
-      "departure": "Departure: 2021-09-14",
-      "direct": "Direct Flight",
-      "id": 3
     }
   ]
 }
