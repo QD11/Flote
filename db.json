@@ -37,6 +37,16 @@
     }
   ],
   "userquotes": [
-    
+    {
+      "nameDep": "Spirit Airlines",
+      "nameRet": "",
+      "cities": "Houston to Los Angeles",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
+      "price": "Price: $297",
+      "departure": "Departure: 2021-09-14",
+      "arrival": "",
+      "direct": "Flight Stops",
+      "id": 1
+    }
   ]
 }

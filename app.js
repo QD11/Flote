@@ -21,7 +21,6 @@ fetch(URL_MAIN)
 .then(resp => resp.json())
 .then(data => {
     data.forEach(element => {
-        console.log(element)
         createCard(element.image, element.cities, element.nameDep, element.nameRet, element.price, element.departure, element.arrival, element.direct, 'delete', saveQuoteContainer)
     })
 })
