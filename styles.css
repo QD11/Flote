@@ -54,3 +54,8 @@
     width: 100px;
     height: 100px;
   }
+
+  button{
+    background-color: rgb(95, 250, 95);
+    padding: 10px;
+  }

@@ -109,9 +109,17 @@ function renderQuotes(data){
         const displayDirect = document.createElement('p')
         displayDirect.textContent = flightDirect 
 
-        flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayTime, displayDirect)
+        const saveBttn = document.createElement('button')
+        saveBttn.textContent = 'Save Quote'
+        saveBttn.addEventListener('click', saveQuote)
+
+        flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayTime, displayDirect, saveBttn)
         flightContainer.appendChild(flightCard)
     })
+}
+
+function saveQuote(e){
+    console.log('need stuff')
 }
 
 
