@@ -54,6 +54,20 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 
 
 function renderQuotes(data, returnDate){
+    while (flightContainer.firstChild) {
+        flightContainer.removeChild(flightContainer.firstChild);
+    }
+    if (data.Quotes.length === 0){
+        console.log('hey')
+        const noDataDiv = document.createElement('div')
+        noDataDiv.className = 'nodata'
+        const noData = document.createElement('h1')
+        noData.innerText = 'NO QUOTES AVAILABLE'
+        noDataDiv.append(noData)
+        flightContainer.appendChild(noDataDiv)
+    }
+    else {
+
     let carrierArr = []
 
     data.Carriers.forEach(carrier => checkFlight(carrier))
@@ -65,9 +79,6 @@ function renderQuotes(data, returnDate){
         carrierArr.push(carrier)
     }
     
-    while (flightContainer.firstChild) {
-        flightContainer.removeChild(flightContainer.firstChild);
-    }
     data.Quotes.forEach(quote => {
         // console.log(quote)
         const flightPrice = quote.MinPrice
@@ -141,12 +152,13 @@ function renderQuotes(data, returnDate){
         }
         
         flightContainer.appendChild(flightCard)
+        
     })
-}
+}}
 
 function saveQuote(e){
     console.log('need stuff')
 }
 
 
-renderInputs('IAH','LAX','anytime','')
+renderInputs('IAH','LAX','2021-09-14','2021-09-29')
