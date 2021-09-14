@@ -16,7 +16,14 @@ const returnDate = document.getElementById('return-date')
 const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 
-
+fetch(URL_MAIN)
+.then(resp => resp.json())
+.then(data => {
+    data.forEach(element => {
+        console.log(element)
+        createCard(element.image, element.name, element.price, element.departure, element.direct, 'Delete Quote', '', saveQuoteContainer)
+    })
+})
 
 roundTrip.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
@@ -165,7 +172,11 @@ function renderQuotes(data, returnDate){
                 },
                 body: JSON.stringify(flights)
             })
-
+            saveBttn.remove()
+            const delBttn = document.createElement('button')
+            delBttn.textContent = 'Delete Quote'
+            
+            flightCard.append(delBttn)
             saveQuoteContainer.appendChild(flightCard)
         }
 
@@ -173,7 +184,7 @@ function renderQuotes(data, returnDate){
             flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
         }
         else {
-            flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, displayTime, displayDirect, saveBttn)
+            flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, displayDirect, saveBttn)
         }
         
         flightContainer.appendChild(flightCard)
@@ -181,17 +192,40 @@ function renderQuotes(data, returnDate){
     })
 }}
 
+function createCard(image, nameDep, price, departure, direct, bttn, bttnfunc, parentNode) {
+    console.log('hi')
+    const flightCard = document.createElement('div')
+    flightCard.className = 'flight-card'
+
+    const displayDeparture = document.createElement('h1')
+    displayDeparture.textContent = departure
+
+    const flightImg = document.createElement('img')
+    flightImg.src = image
+    flightImg.className = 'flight-image'
+
+    const flightNameDep = document.createElement('h1')
+    flightNameDep.textContent = nameDep
+
+    const displayPrice = document.createElement('h2')
+    displayPrice.className = 'airline'
+    displayPrice.textContent = `Price: $${price}` 
+
+    const displayDirect = document.createElement('p')
+    displayDirect.textContent = direct
+
+    const buttton = document.createElement('button')
+    buttton.textContent = bttn
+    // bttn.addEventListener('click', bttnfunc)
+
+    flightCard.append(flightImg, flightNameDep, displayPrice, displayDeparture, displayDirect, bttn)
+    parentNode.appendChild(flightCard)
+}
 
 
 
 
-renderInputs('IAH','LAX','2021-09-14','2021-09-29')
+renderInputs('IAH','LAX','2021-09-14','')
 
 
 
-
-
-      
-
-       
-        

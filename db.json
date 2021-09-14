@@ -38,51 +38,6 @@
   ],
   "userquotes": [
     {
-      "id": 1,
-      "name": "",
-      "image": "",
-      "price": 0,
-      "departure": "",
-      "direct": ""
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "name": {},
-      "image": {},
-      "price": {},
-      "departure": {},
-      "direct": {},
-      "id": 9
-    },
-    {
-      "name": {},
-      "image": {},
-      "price": {},
-      "departure": {},
-      "direct": {},
-      "id": 10
-    },
-    {
       "name": "Viva Aerobus",
       "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
       "price": "Price: $289",
