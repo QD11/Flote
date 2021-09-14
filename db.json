@@ -1,0 +1,39 @@
+{
+  "airlines": [
+    {
+      "id": 1,
+      "name": "Alaska Airlines",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg"
+    },
+    {
+      "id": 2,
+      "name": "Frontier Airlines",
+      "image": "https://upload.wikimedia.org/wikipedia/en/c/cf/Frontier_Airlines_logo.svg",
+    },
+    {
+      "id": 3,
+      "name": "United",
+      "image": "https://upload.wikimedia.org/wikipedia/en/e/e0/United_Airlines_Logo.svg",
+    },
+    {
+      "id": 4,
+      "name": "Sun Country Airlines",
+      "image": "https://upload.wikimedia.org/wikipedia/en/1/16/Sun_Country_Airlines_logo.svg",
+    },
+    {
+      "id": 5,
+      "name": "jetBlue",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/JetBlue_Airways_Logo.svg",
+    },
+    {
+      "id": 6,
+      "name": "Spirit Airlines",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
+    },
+    {
+      "id": 7,
+      "name": "Viva Aerobus",
+      "image": "https://upload.wikimedia.org/wikipedia/en/f/f6/VivaAerobus_Logo.svg",
+    },
+  ]
+}
