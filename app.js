@@ -57,14 +57,14 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 	}
     })
     .then(response => response.json())
-    .then(data => renderQuotes(data, returnDate))
+    .then(data => renderQuotes(data, origin, destination, returnDate))
     .catch(err => {
 	console.error(err);
     });
 }
 
 
-function renderQuotes(data, returnDate){
+function renderQuotes(data,origin, destination, returnDate){
     while (flightContainer.firstChild) {
         flightContainer.removeChild(flightContainer.firstChild);
     }
@@ -86,8 +86,19 @@ function renderQuotes(data, returnDate){
     function checkFlight(carrier){
         carrierArr.push(carrier)
     }
-    const cityDep =  data.Places[0].CityName
-    const cityArr = data.Places[1].CityName
+    const [cityDep, cityArr] = (() => {
+        let cityOrigin
+        let cityDestination
+        for (i = 0; i < data.Places.length; i++) {
+            if (origin === data.Places[i].SkyscannerCode) {
+                cityOrigin = data.Places[i].CityName
+            }
+            if (destination === data.Places[i].SkyscannerCode) {
+                cityDestination = data.Places[i].CityName
+            } 
+        }
+        return [cityOrigin, cityDestination]
+    })()
     
     data.Quotes.forEach(quote => {
         const flightPrice = quote.MinPrice
@@ -96,12 +107,14 @@ function renderQuotes(data, returnDate){
         //const flightTime = flightDep.slice(10)
         const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
 
-        let flightIdRet
-        let flightRet
-        if (returnDate) {
-            flightIdRet = quote.InboundLeg.CarrierIds[0]
-            flightRet = quote.InboundLeg.DepartureDate.slice(0,10)
-        }
+        const [flightIdRet, flightRet] = (() => {
+            if (returnDate) {
+                return [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)]
+            }
+            else {
+                return ['','']
+            }
+        })()
 
         carrierArr.forEach(elem => {
             if(flightIdDep === elem.CarrierId) {
@@ -156,7 +169,7 @@ function createCard(image, cities, nameDep, nameRet, price, departure, retur, di
     const delQuote = () => {
         console.log('DELLEEEETTE')
     }
-    
+
     if (button === 'save') {
         btttn.textContent = 'Save Quote!'
         btttn.addEventListener('click', () =>{
