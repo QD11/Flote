@@ -21,7 +21,7 @@ fetch(URL_MAIN)
 .then(resp => resp.json())
 .then(data => {
     data.forEach(element => {
-        createCard(element.image, element.cities, element.nameDep, element.nameRet, element.price, element.departure, element.arrival, element.direct, 'delete', saveQuoteContainer)
+        createCard(element.image, element.cities, element.nameDep, element.nameRet, element.price, element.departure, element.arrival, element.direct, 'delete', saveQuoteContainer, element.id)
     })
 })
 
@@ -150,7 +150,7 @@ function renderQuotes(data,origin, destination, returnDate){
     })
 }}
 
-function createCard(image, cities, nameDep, nameRet, price, departure, retur, direct, button, parentNode) {
+function createCard(image, cities, nameDep, nameRet, price, departure, retur, direct, button, parentNode, id) {
     const flightCard = document.createElement('div')
     flightCard.className = 'flight-card'
 
@@ -185,8 +185,12 @@ function createCard(image, cities, nameDep, nameRet, price, departure, retur, di
     const btttn = document.createElement('button')
 
     const delQuote = () => {
-        console.log('DELLEEEETTE')
+        flightCard.remove()
+        fetch(`${URL_MAIN}/${id}`, {
+            method: "DELETE"
+        })
     }
+
 
     if (button === 'save') {
         btttn.textContent = 'Save Quote!'
