@@ -8,32 +8,143 @@
     {
       "id": 2,
       "name": "Frontier Airlines",
-      "image": "https://upload.wikimedia.org/wikipedia/en/c/cf/Frontier_Airlines_logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/en/c/cf/Frontier_Airlines_logo.svg"
     },
     {
       "id": 3,
       "name": "United",
-      "image": "https://upload.wikimedia.org/wikipedia/en/e/e0/United_Airlines_Logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/en/e/e0/United_Airlines_Logo.svg"
     },
     {
       "id": 4,
       "name": "Sun Country Airlines",
-      "image": "https://upload.wikimedia.org/wikipedia/en/1/16/Sun_Country_Airlines_logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/en/1/16/Sun_Country_Airlines_logo.svg"
     },
     {
       "id": 5,
       "name": "jetBlue",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/JetBlue_Airways_Logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/JetBlue_Airways_Logo.svg"
     },
     {
       "id": 6,
       "name": "Spirit Airlines",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg"
     },
     {
       "id": 7,
       "name": "Viva Aerobus",
-      "image": "https://upload.wikimedia.org/wikipedia/en/f/f6/VivaAerobus_Logo.svg",
+      "image": "https://upload.wikimedia.org/wikipedia/en/f/f6/VivaAerobus_Logo.svg"
+    }
+  ],
+  "userquotes": [
+    {
+      "id": 1,
+      "name": "",
+      "image": "",
+      "price": 0,
+      "departure": "",
+      "direct": ""
     },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "name": {},
+      "image": {},
+      "price": {},
+      "departure": {},
+      "direct": {},
+      "id": 9
+    },
+    {
+      "name": {},
+      "image": {},
+      "price": {},
+      "departure": {},
+      "direct": {},
+      "id": 10
+    },
+    {
+      "name": "Viva Aerobus",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $289",
+      "departure": "Departure: 2022-08-25",
+      "direct": "Connecting",
+      "id": 11
+    },
+    {
+      "name": "United",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $190",
+      "departure": "Departure: 2022-07-01",
+      "direct": "Direct Flight",
+      "id": 12
+    },
+    {
+      "name": "United",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $169",
+      "departure": "Departure: 2022-05-13",
+      "direct": "Direct Flight",
+      "id": 13
+    },
+    {
+      "name": "Alaska Airlines",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $165",
+      "departure": "Departure: 2021-09-14",
+      "direct": "Direct Flight",
+      "id": 14
+    },
+    {
+      "name": "Spirit Airlines",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $163",
+      "departure": "Departure: 2021-09-14",
+      "direct": "Connecting",
+      "id": 15
+    },
+    {
+      "name": "Alaska Airlines",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $165",
+      "departure": "Departure: 2021-09-14",
+      "direct": "Direct Flight",
+      "id": 16
+    },
+    {
+      "name": "Viva Aerobus",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $289",
+      "departure": "Departure: 2022-08-25",
+      "direct": "Connecting",
+      "id": 17
+    },
+    {
+      "name": "United",
+      "image": "https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200",
+      "price": "Price: $190",
+      "departure": "Departure: 2022-07-01",
+      "direct": "Direct Flight",
+      "id": 18
+    }
   ]
 }

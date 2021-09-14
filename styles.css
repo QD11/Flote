@@ -1,3 +1,9 @@
+body{
+  background-image: url('https://starkaerospace.com/wp-content/uploads/2014/06/background-world-map-1.gif');
+  background-position: center;
+}
+
+
 #quote-bttn {
   background-color: #000000;
   color: #FFFFFF;
@@ -58,4 +64,11 @@
   button{
     background-color: rgb(95, 250, 95);
     padding: 10px;
+  }
+
+  #user-saves{
+    color: rgb(172, 208, 231);
+    padding: 10px;
+    font-size: 50px;
+    text-align: center;
   }

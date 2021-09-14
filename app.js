@@ -1,3 +1,5 @@
+const URL_MAIN = 'http://localhost:3000/userquotes'
+
 const today = new Date().toISOString().slice(0, 10)
 const tomorrow = new Date() 
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -12,7 +14,9 @@ leaveDate.value = today
 leaveDate.min = today
 const returnDate = document.getElementById('return-date')
 const roundTrip = document.querySelector('#round-trip')
-// let carrierArr = []
+const saveQuoteContainer = document.querySelector('#saved-quotes-container')
+
+
 
 roundTrip.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
@@ -41,7 +45,7 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
         returnDateUrl = `?inboundpartialdate=${returnDate}`
     }
     const URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/${origin}/${destination}/${departingDate}/` + returnDateUrl
-    console.log(URL)
+    // console.log(URL)
     fetch(URL, {
 	"method": "GET",
 	"headers": {
@@ -62,7 +66,7 @@ function renderQuotes(data){
 
     data.Carriers.forEach(carrier => checkFlight(carrier))
 
-    console.log(carrierArr)
+    // console.log(carrierArr)
     function checkFlight(carrier){
         // console.log(carrier)
         carrierArr.push(carrier)
@@ -79,7 +83,7 @@ function renderQuotes(data){
         let flightId = quote.OutboundLeg.CarrierIds[0]
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightTime = flightDep.slice(10)
-        const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
+        const flightDirect = quote.Direct ? `Direct Flight` : `Connecting`
 
         carrierArr.forEach(elem => {
             if(flightId === elem.CarrierId) {
@@ -102,9 +106,6 @@ function renderQuotes(data){
 
         const displayDeparture = document.createElement('h3')
         displayDeparture.textContent = `Departure: ${flightDep.slice(0,10)}`
-        
-        const displayTime = document.createElement('p')
-        displayTime.textContent = flightTime
 
         const displayDirect = document.createElement('p')
         displayDirect.textContent = flightDirect 
@@ -113,14 +114,37 @@ function renderQuotes(data){
         saveBttn.textContent = 'Save Quote'
         saveBttn.addEventListener('click', saveQuote)
 
-        flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayTime, displayDirect, saveBttn)
+        flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayDirect, saveBttn)
         flightContainer.appendChild(flightCard)
+
+      
+
+        function saveQuote(e){
+
+            const flights = {
+                name : flightName.textContent,
+                image : flightImg.src,
+                price : displayPrice.textContent,
+                departure : displayDeparture.textContent,
+                direct : displayDirect.textContent
+            }
+            console.log(flights)
+            fetch(URL_MAIN, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(flights)
+            })
+
+            saveQuoteContainer.appendChild(flightCard)
+        }
+        
     })
 }
 
-function saveQuote(e){
-    console.log('need stuff')
-}
+
+
 
 
 renderInputs('IAH','LAX','anytime','')
