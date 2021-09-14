@@ -41,12 +41,33 @@
       "nameDep": "Spirit Airlines",
       "nameRet": "",
       "cities": "Houston to Los Angeles",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
-      "price": "Price: $297",
-      "departure": "Departure: 2021-09-14",
+      "price": 298,
+      "departure": "2021-09-14",
       "arrival": "",
       "direct": "Flight Stops",
       "id": 1
+    },
+    {
+      "nameDep": "Spirit Airlines",
+      "nameRet": "",
+      "cities": "Houston to Los Angeles",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
+      "price": 298,
+      "departure": "2021-09-14",
+      "arrival": "",
+      "direct": "Flight Stops",
+      "id": 2
+    },
+    {
+      "nameDep": "United",
+      "nameRet": "United",
+      "cities": "Houston to Los Angeles",
+      "image": "https://upload.wikimedia.org/wikipedia/en/e/e0/United_Airlines_Logo.svg",
+      "price": 358,
+      "departure": "2021-09-14",
+      "arrival": "2021-09-19",
+      "direct": "Direct Flight",
+      "id": 3
     }
   ]
 }

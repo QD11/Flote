@@ -117,7 +117,7 @@ function renderQuotes(data,origin, destination, returnDate){
         //const flightTime = flightDep.slice(10)
         const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
 
-        const [flightIdRet, flightRet] = (() => {
+        let [flightIdRet, flightRet] = (() => {
             if (returnDate) {
                 return [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)]
             }
@@ -192,14 +192,14 @@ function createCard(image, cities, nameDep, nameRet, price, departure, retur, di
         btttn.textContent = 'Save Quote!'
         btttn.addEventListener('click', () =>{
             const flights = {
-                nameDep : flightNameDep.textContent,
-                nameRet : flightNameRet.textContent,
-                cities: flightCities.textContent,
-                image : flightImg.src,
-                price : displayPrice.textContent,
-                departure : displayDeparture.textContent,
-                arrival : displayReturn.textContent,
-                direct : displayDirect.textContent
+                nameDep : nameDep,
+                nameRet : nameRet,
+                cities: cities,
+                image : image,
+                price : price,
+                departure : departure,
+                arrival : retur,
+                direct : direct
             }
             fetch(URL_MAIN, {
                 method: "POST",
