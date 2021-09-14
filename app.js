@@ -1,4 +1,5 @@
 const URL_MAIN = 'http://localhost:3000/userquotes'
+const URL_AIRLINE = 'http://localhost:3000/airlines'
 
 const today = new Date().toISOString().slice(0, 10)
 const tomorrow = new Date() 
@@ -24,6 +25,18 @@ fetch(URL_MAIN)
         createCard(element.image, element.cities, element.nameDep, element.nameRet, element.price, element.departure, element.arrival, element.direct, 'delete', saveQuoteContainer)
     })
 })
+
+const airlines = []
+fetch(URL_AIRLINE)
+.then(resp => resp.json())
+.then(data => {
+    data.forEach(element => {
+        airlines.push(element)
+    }
+    )}
+)
+
+
 
 roundTrip.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
@@ -125,7 +138,15 @@ function renderQuotes(data,origin, destination, returnDate){
             }
         })
 
-        const imgLink = 'https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200'
+        //const imgLink = 'https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200'
+        const imgLink = (() => {
+            for (i=0; i < airlines.length; i++) {
+                if (flightIdDep === airlines[i].name) {
+                    return airlines[i].image
+                }
+            }
+        })()
+        
         createCard(imgLink, cityDep + ' to ' + cityArr, flightIdDep, flightIdRet, flightPrice, flightDep.slice(0,10), returnDate, flightDirect, 'save', flightContainer)
     })
 }}
