@@ -1,4 +1,7 @@
 const today = new Date().toISOString().slice(0, 10)
+const tomorrow = new Date() 
+tomorrow.setDate(tomorrow.getDate() + 1);
+const newTomorrow = tomorrow.toISOString().slice(0,10)
 const date = document.querySelector('#leave-date')
 const flightContainer = document.querySelector('#flight-render-container')
 const quoteForm = document.getElementById('flight-form')
@@ -8,7 +11,21 @@ const leaveDate = document.getElementById('leave-date')
 leaveDate.value = today
 leaveDate.min = today
 const returnDate = document.getElementById('return-date')
+const roundTrip = document.querySelector('#round-trip')
 // let carrierArr = []
+
+roundTrip.addEventListener('change', (event) => {
+    if (event.currentTarget.checked) {
+        returnDate.disabled = false
+        returnDate.min = newTomorrow
+        returnDate.value = newTomorrow
+    } else {
+        returnDate.value = ''
+        returnDate.disabled = true
+    }
+})
+
+
 
 quoteForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -46,7 +63,6 @@ function renderQuotes(data){
     data.Carriers.forEach(carrier => checkFlight(carrier))
 
     console.log(carrierArr)
-   
     function checkFlight(carrier){
         // console.log(carrier)
         carrierArr.push(carrier)
@@ -61,20 +77,15 @@ function renderQuotes(data){
         
         const flightPrice = quote.MinPrice
         let flightId = quote.OutboundLeg.CarrierIds[0]
-        console.log(flightId)
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightTime = flightDep.slice(10)
         const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
 
         carrierArr.forEach(elem => {
-            console.log(elem.CarrierId)
             if(flightId === elem.CarrierId) {
-               flightId = elem.Name    
-               console.log(flightId)        
+            flightId = elem.Name           
             }
         })
-       
-        
         const flightCard = document.createElement('div')
         flightCard.className = 'flight-card'
 
@@ -100,11 +111,7 @@ function renderQuotes(data){
 
         flightCard.append(flightImg, flightName, displayPrice, displayDeparture, displayTime, displayDirect)
         flightContainer.appendChild(flightCard)
-
-      
     })
-
-   
 }
 
 
