@@ -69,7 +69,6 @@ function renderQuotes(data,origin, destination, returnDate){
         flightContainer.removeChild(flightContainer.firstChild);
     }
     if (data.Quotes.length === 0){
-        console.log('hey')
         const noDataDiv = document.createElement('div')
         noDataDiv.className = 'nodata'
         const noData = document.createElement('h1')
@@ -81,11 +80,10 @@ function renderQuotes(data,origin, destination, returnDate){
 
     let carrierArr = []
 
-    data.Carriers.forEach(carrier => checkFlight(carrier))
-
-    function checkFlight(carrier){
+    data.Carriers.forEach(carrier => {
         carrierArr.push(carrier)
-    }
+    })
+
     const [cityDep, cityArr] = (() => {
         let cityOrigin
         let cityDestination
