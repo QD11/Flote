@@ -8,23 +8,25 @@
     <title>Flight Quote</title>
 </head>
 <body>
-    <div id=flight-form-container>
-        <!-- flight-form container -->
-        <form id='flight-form'>
-            <input type="text" name="outbound-terminal" id="outbound-terminal">
-            <input type="text" name="arrival-terminal" id="arrival-terminal">
-            <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
-            min="2021-09-13">
-            <input type="date" name='return-date' id='return-date'>
-            <button id='quote-bttn'>Get Quotes</button>
-        </form>
-    </div>
-    <!-- we render flight quotes here for now -->
-    <div id=flight-render-container> 
-        
-    </div>
     <div>
-
-    </div>
+        <div id=flight-form-container>
+            <!-- flight-form container -->
+            <form id='flight-form'>
+                <input type="text" name="outbound-terminal" id="outbound-terminal">
+                <input type="text" name="arrival-terminal" id="arrival-terminal">
+                <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
+                min="2021-09-13">
+                <input type="date" name='return-date' id='return-date'>
+                <button id='quote-bttn'>Get Quotes</button>
+            </form>
+        </div>
+        <!-- we render flight quotes here for now -->
+        <div id=flight-render-container> 
+            
+        </div>
+        <div id='map-container'>
+    
+        </div>
+    </div>  
 </body>
 </html>

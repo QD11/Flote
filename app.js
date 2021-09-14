@@ -8,6 +8,7 @@ const leaveDate = document.getElementById('leave-date')
 leaveDate.value = today
 leaveDate.min = today
 const returnDate = document.getElementById('return-date')
+let carrierId; 
 
 quoteForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -40,40 +41,51 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 
 
 function renderQuotes(data){
+
+    // data.Carriers.forEach(carrier => checkFlight(carrier))
+
+    // // function checkFlight(carrier){
+    // //     //later
+    // // }
+    
     while (flightContainer.firstChild) {
         flightContainer.removeChild(flightContainer.firstChild);
     }
     data.Quotes.forEach(quote => {
-        //min pirce
-        //carrierid
-        //departure date / time
-        //direct - true/false
         console.log(quote)
+
+      
         const flightPrice = quote.MinPrice
-        const flightCarrier = quote.OutboundLeg.CarrierIds[0]
+        const flightId = quote.OutboundLeg.CarrierIds[0]
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightTime = flightDep.slice(10)
-        const flightDirect = quote.Direct
+        const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
+
 
         const flightCard = document.createElement('div')
         flightCard.className = 'flight-card'
 
-        const displayPrice = document.createElement('h3')
-        displayPrice.textContent = `$${flightPrice}`
+        const displayPrice = document.createElement('h2')
+        displayPrice.className = 'airline'
+        displayPrice.textContent = `Price: $${flightPrice}`
 
-        const displayDeparture = document.createElement('p')
-        displayDeparture.textContent = flightDep
+        const displayDeparture = document.createElement('h3')
+        displayDeparture.textContent = `Departure: ${flightDep.slice(0,10)}`
         
-        const displayTime = document.createElement('li')
+        const displayTime = document.createElement('p')
         displayTime.textContent = flightTime
 
-        const displayDirect = document.createElement('li')
-        displayDirect.textContent = flightDirect
+        const displayDirect = document.createElement('p')
+        displayDirect.textContent = flightDirect 
 
         flightCard.append(displayPrice, displayDeparture, displayTime, displayDirect)
         flightContainer.appendChild(flightCard)
+
+      
     })
+
+   
 }
 
 
-//renderInputs('IAH','LAX','anytime','')
+renderInputs('IAH','LAX','anytime','')

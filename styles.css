@@ -1,25 +1,37 @@
 
 
+
 #flight-form{
     text-align: center;
     margin: 50px;
 }
 
+#flight-render-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .flight-card{
     border: solid;
-    border-color: #ffcb05;
+    border-color: #292517;
+    background: #eeedecf5;
     padding: 50px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     margin: 30px;
     float: left;
     text-align: center;
-    width: 100px;
-    height: 275px;
+    width: 540px;
+    height: 214px;
+    border-radius: 3px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
   
   .flight-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(218, 31, 31, 0.685);
+    box-shadow: 0 8px 16px 0 rgba(252, 181, 74, 0.685);
   }
   
   #quote-card {
