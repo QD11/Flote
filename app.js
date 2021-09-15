@@ -81,12 +81,9 @@ function renderQuotes(data,origin, destination, returnDate){
         flightContainer.removeChild(flightContainer.firstChild);
     }
     if (data.Quotes.length === 0){
-        const noDataDiv = document.createElement('div')
-        noDataDiv.className = 'nodata'
         const noData = document.createElement('h1')
         noData.innerText = 'NO QUOTES AVAILABLE'
-        noDataDiv.append(noData)
-        flightContainer.appendChild(noDataDiv)
+        flightContainer.appendChild(noData)
     }
     else {
 
@@ -124,8 +121,7 @@ function renderQuotes(data,origin, destination, returnDate){
             }
         })
 
-        //const imgLink = airlines.find(x => x.name == flightIdDep).image
-        const imgLink = ''
+        const imgLink = airlines.find(x => x.name == flightIdDep).image
 
         const flightInfo = {
             nameDep : flightIdDep,
@@ -138,12 +134,10 @@ function renderQuotes(data,origin, destination, returnDate){
             direct : flightDirect
         }
 
-        //createCard(imgLink, cityDep + ' to ' + cityArr, flightIdDep, flightIdRet, flightPrice, flightDep.slice(0,10), returnDate, flightDirect, 'save', flightContainer)
         createCard(flightInfo, 'save', flightContainer)
     })
 }}
 
-//function createCard(image, cities, nameDep, nameRet, price, departure, retur, direct, button, parentNode, id) {
 function createCard(flightInfo, button, parentNode) {
     const flightCard = document.createElement('div')
     flightCard.className = 'flight-card'
