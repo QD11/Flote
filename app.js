@@ -21,7 +21,7 @@ fetch(URL_MAIN)
 .then(resp => resp.json())
 .then(data => {
     data.forEach(element => {
-        createCard(element.image, element.cities, element.nameDep, element.nameRet, element.price, element.departure, element.arrival, element.direct, 'delete', saveQuoteContainer, element.id)
+        createCard(element, 'delete', saveQuoteContainer)
     })
 })
 
@@ -90,31 +90,18 @@ function renderQuotes(data,origin, destination, returnDate){
     }
     else {
 
-    let carrierArr = []
+    const carrierArr = []
 
     data.Carriers.forEach(carrier => {
         carrierArr.push(carrier)
     })
+    const cityDep = data.Places.find(x => x.SkyscannerCode === origin).CityName
+    const cityArr = data.Places.find(x => x.SkyscannerCode === destination).CityName
 
-    const [cityDep, cityArr] = (() => {
-        let cityOrigin
-        let cityDestination
-        for (i = 0; i < data.Places.length; i++) {
-            if (origin === data.Places[i].SkyscannerCode) {
-                cityOrigin = data.Places[i].CityName
-            }
-            if (destination === data.Places[i].SkyscannerCode) {
-                cityDestination = data.Places[i].CityName
-            } 
-        }
-        return [cityOrigin, cityDestination]
-    })()
-    
     data.Quotes.forEach(quote => {
         const flightPrice = quote.MinPrice
         let flightIdDep = quote.OutboundLeg.CarrierIds[0]
         const flightDep = quote.OutboundLeg.DepartureDate
-        //const flightTime = flightDep.slice(10)
         const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
 
         let [flightIdRet, flightRet] = (() => {
@@ -137,99 +124,108 @@ function renderQuotes(data,origin, destination, returnDate){
             }
         })
 
-        //const imgLink = 'https://www.gannett-cdn.com/presto/2019/06/23/USAT/c3a9f051-bd6c-4b39-b5b9-38244deec783-GettyImages-932651818.jpg?auto=webp&crop=667,375,x0,y80&format=pjpg&width=1200'
-        const imgLink = (() => {
-            for (i=0; i < airlines.length; i++) {
-                if (flightIdDep === airlines[i].name) {
-                    return airlines[i].image
-                }
-            }
-        })()
-        
-        createCard(imgLink, cityDep + ' to ' + cityArr, flightIdDep, flightIdRet, flightPrice, flightDep.slice(0,10), returnDate, flightDirect, 'save', flightContainer)
+        //const imgLink = airlines.find(x => x.name == flightIdDep).image
+        const imgLink = ''
+
+        const flightInfo = {
+            nameDep : flightIdDep,
+            nameRet : flightIdRet,
+            cities: cityDep + ' to ' + cityArr,
+            image : imgLink,
+            price : flightPrice,
+            departure : flightDep.slice(0,10),
+            arrival : returnDate,
+            direct : flightDirect
+        }
+
+        //createCard(imgLink, cityDep + ' to ' + cityArr, flightIdDep, flightIdRet, flightPrice, flightDep.slice(0,10), returnDate, flightDirect, 'save', flightContainer)
+        createCard(flightInfo, 'save', flightContainer)
     })
 }}
 
-function createCard(image, cities, nameDep, nameRet, price, departure, retur, direct, button, parentNode, id) {
+//function createCard(image, cities, nameDep, nameRet, price, departure, retur, direct, button, parentNode, id) {
+function createCard(flightInfo, button, parentNode) {
     const flightCard = document.createElement('div')
     flightCard.className = 'flight-card'
 
     const flightCities = document.createElement('h1')
-    flightCities.textContent = cities
+    flightCities.textContent = flightInfo.cities
 
     const displayDeparture = document.createElement('h3')
-    displayDeparture.textContent = `Departure: ${departure}`
+    displayDeparture.textContent = `Departure: ${flightInfo.departure}`
 
     const displayReturn = document.createElement('h3')
-    if (retur) {
-        displayReturn.textContent = `Return: ${retur}`
-    }
+    displayReturn.textContent = (flightInfo.arrival) ? `Return: ${flightInfo.arrival}` : ''
 
     const flightImg = document.createElement('img')
-    flightImg.src = image
     flightImg.className = 'flight-image'
+    flightImg.src =  (flightInfo.image) ? flightInfo.image : 'https://komonews.com/resources/media/cfb385c3-b38c-49d1-a9d4-17b5fcf95d02-medium16x9_boeing_747_8_cargo.jpg?1477596133113'
 
     const flightNameDep = document.createElement('h1')
-    flightNameDep.textContent = nameDep
+    flightNameDep.textContent = flightInfo.nameDep
 
     const flightNameRet = document.createElement('h1')
-    flightNameRet.textContent = nameRet
+    flightNameRet.textContent = flightInfo.nameRet
 
     const displayPrice = document.createElement('h2')
     displayPrice.className = 'airline'
-    displayPrice.textContent = `Price: $${price}` 
+    displayPrice.textContent = `Price: $${flightInfo.price}` 
 
     const displayDirect = document.createElement('p')
-    displayDirect.textContent = direct
+    displayDirect.textContent = flightInfo.direct
 
-    const btttn = document.createElement('button')
+    const saveBttn = document.createElement('button')
+    saveBttn.textContent = 'Save Quote!'
+    saveBttn.addEventListener('click', () => {
+        fetch(URL_MAIN, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(flightInfo)
+        })
+        .then(resp => resp.json())
+        .then(function(flightInfo) {
+        console.log(flightInfo)
+        saveBttn.remove()
+        const delBttn = document.createElement('button')
+        delBttn.textContent = 'Delete Quote'
+        delBttn.addEventListener('click', () => {
+            flightCard.remove()
+            fetch(`${URL_MAIN}/${flightInfo.id}`, {
+                method: "DELETE",
+            });
+        })
+        flightCard.append(delBttn)
+        saveQuoteContainer.append(flightCard)
+        })
+    })
 
-    const delQuote = () => {
+    const delBttn = document.createElement('button')
+    delBttn.textContent = 'Delete Quote'
+    delBttn.addEventListener('click', () => {
         flightCard.remove()
-        fetch(`${URL_MAIN}/${id}`, {
-            method: "DELETE"
-        })
-    }
+        fetch(`${URL_MAIN}/${flightInfo.id}`, {
+            method: "DELETE",
+        });
+    })
 
+    //How does this work?
+    // function delQuote() {
+    //     flightCard.remove()
+    //     fetch(`${URL_MAIN}/${flightInfo.id}`, {
+    //         method: "DELETE",
+    //     });
+    // }
 
-    if (button === 'save') {
-        btttn.textContent = 'Save Quote!'
-        btttn.addEventListener('click', () =>{
-            const flights = {
-                nameDep : nameDep,
-                nameRet : nameRet,
-                cities: cities,
-                image : image,
-                price : price,
-                departure : departure,
-                arrival : retur,
-                direct : direct
-            }
-            fetch(URL_MAIN, {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(flights)
-            })
-            btttn.remove()
-            const delBttn = document.createElement('button')
-            delBttn.textContent = 'Delete Quote'
-            delBttn.addEventListener('click', delQuote)
-            flightCard.append(delBttn)
-            saveQuoteContainer.append(flightCard)
-        })
+    if (button === 'save'){
+        flightCard.append(flightImg, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
+    } else {
+        flightCard.append(flightImg, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, delBttn)
     }
-    else if (button === 'delete') {
-        btttn.textContent = 'Delete Quote'
-        btttn.addEventListener('click', delQuote)
-    }
-
-    flightCard.append(flightImg, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, btttn)
     parentNode.appendChild(flightCard)
 }
-
-renderInputs('IAH','LAX','2021-09-14','')
+//renderInputs('IAH','LAX','2021-09-15','')
 
 
 
