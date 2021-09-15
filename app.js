@@ -172,10 +172,7 @@ function createCard(flightInfo, button, parentNode) {
         delBttn.id = 'del-button'
         delBttn.textContent = 'Delete Quote'
         delBttn.addEventListener('click', () => {
-            flightCard.remove()
-            fetch(`${URL_MAIN}/${flightInfo.id}`, {
-                method: "DELETE",
-            });
+            delQuote(flightInfo, flightCard)
         })
         flightCard.append(delBttn)
         saveQuoteContainer.append(flightCard)
@@ -186,19 +183,15 @@ function createCard(flightInfo, button, parentNode) {
     delBttn.id = 'del-button'
     delBttn.textContent = 'Delete Quote'
     delBttn.addEventListener('click', () => {
+        delQuote(flightInfo, flightCard)
+    })
+
+    function delQuote(flightInfo, flightCard) {
         flightCard.remove()
         fetch(`${URL_MAIN}/${flightInfo.id}`, {
             method: "DELETE",
         });
-    })
-
-    //How does this work?
-    // function delQuote() {
-    //     flightCard.remove()
-    //     fetch(`${URL_MAIN}/${flightInfo.id}`, {
-    //         method: "DELETE",
-    //     });
-    // }
+    }
 
     if (button === 'save'){
         flightCard.append(flightImg, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
