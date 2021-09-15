@@ -36,17 +36,5 @@
       "image": "https://upload.wikimedia.org/wikipedia/en/f/f6/VivaAerobus_Logo.svg"
     }
   ],
-  "userquotes": [
-    {
-      "nameDep": "Frontier Airlines",
-      "nameRet": "",
-      "cities": "Houston to San Francisco",
-      "image": "https://upload.wikimedia.org/wikipedia/en/c/cf/Frontier_Airlines_logo.svg",
-      "price": 99,
-      "departure": "2021-09-15",
-      "arrival": "",
-      "direct": "Connecting Flight",
-      "id": 1
-    }
-  ]
+  "userquotes": []
 }

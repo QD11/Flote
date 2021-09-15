@@ -184,6 +184,7 @@ function createCard(flightInfo, button, parentNode) {
         console.log(flightInfo)
         saveBttn.remove()
         const delBttn = document.createElement('button')
+        delBttn.id = 'del-button'
         delBttn.textContent = 'Delete Quote'
         delBttn.addEventListener('click', () => {
             flightCard.remove()
