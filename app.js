@@ -111,10 +111,11 @@ function renderQuotes(data,origin, destination, returnDate){
         const imgLinkRet = returnDate ? airlines.find(x => x.name == flightIdRet).image :  ''
 
 
+
         const flightInfo = {
             nameDep : flightIdDep,
             nameRet : flightIdRet,
-            cities: cityDep + ' to ' + cityArr,
+            cities: cityDep + ' ✈ ' + cityArr,
             imgDep : imgLinkDep,
             imgRet : imgLinkRet,
             price : flightPrice,
@@ -136,6 +137,7 @@ function createCard(flightInfo, button, parentNode) {
 
     const displayDeparture = document.createElement('h3')
     displayDeparture.textContent = `Departure: ${flightInfo.departure}`
+    displayDeparture.className = 'departure-class'
 
     const displayReturn = document.createElement('h3')
     displayReturn.textContent = (flightInfo.arrival) ? `Return: ${flightInfo.arrival}` : ''
@@ -157,10 +159,29 @@ function createCard(flightInfo, button, parentNode) {
 
     const displayPrice = document.createElement('h2')
     displayPrice.className = 'airline'
-    displayPrice.textContent = `Price: $${flightInfo.price}` 
+    displayPrice.textContent = `💲${flightInfo.price}` 
 
     const displayDirect = document.createElement('p')
     displayDirect.textContent = flightInfo.direct
+
+    const hr = document.createElement('hr')
+
+    const departDiv = document.createElement('div')
+    departDiv.className = 'depart-div'
+
+    const returnDiv = document.createElement('div')
+    returnDiv.className = 'return-div'
+
+    const topDiv = document.createElement('div')
+    topDiv.className = 'top-div'
+
+    
+    
+    topDiv.append(flightCities, displayPrice)
+    departDiv.append(flightImgDep, flightNameDep, displayDeparture)
+    returnDiv.append(flightImgRet, flightNameRet, displayReturn)
+
+
 
     const saveBttn = document.createElement('button')
     saveBttn.id = 'save-Button'
@@ -181,7 +202,7 @@ function createCard(flightInfo, button, parentNode) {
         delBttn.id = 'del-button'
         delBttn.textContent = 'Delete Quote'
         delBttn.addEventListener('click', () => {
-            delQuote(flightInfo, flightCard)
+            delQuote(flightInfo)
         })
         flightCard.append(delBttn)
         saveQuoteContainer.append(flightCard)
@@ -192,33 +213,35 @@ function createCard(flightInfo, button, parentNode) {
     delBttn.id = 'del-button'
     delBttn.textContent = 'Delete Quote'
     delBttn.addEventListener('click', () => {
-        delQuote(flightInfo, flightCard)
+        delQuote(flightInfo)
     })
 
-    function delQuote(flightInfo, flightCard) {
+    function delQuote(flightInfo) {
         flightCard.remove()
         fetch(`${URL_MAIN}/${flightInfo.id}`, {
             method: "DELETE",
         });
     }
+
+   
     if(flightInfo.arrival){
         if (button === 'save'){
-            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightImgRet, flightNameRet, displayReturn, displayDirect, saveBttn)
+            flightCard.append( topDiv, departDiv, hr, returnDiv ,displayDirect, saveBttn)
         } else {
-            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightImgRet, flightNameRet, displayReturn, displayDirect, delBttn)
+            flightCard.append( topDiv, departDiv, hr, returnDiv, displayDirect, delBttn)
         }
     }else{
         if (button === 'save'){
-            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
+            flightCard.append( topDiv, departDiv, displayDirect, saveBttn)
         } else {
-            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, delBttn)
+            flightCard.append( topDiv, departDiv,  displayDirect, delBttn)
         }
     }
   
     parentNode.appendChild(flightCard)
 }
 
-//renderInputs('IAH','FWA','anytime','')
+renderInputs('IAH','FWA','anytime','')
 
 
 
