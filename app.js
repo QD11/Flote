@@ -6,6 +6,7 @@ const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1);
 const newTomorrow = tomorrow.toISOString().slice(0,10)
 const date = document.querySelector('#leave-date')
+date.textContent = today
 const flightContainer = document.querySelector('#flight-render-container')
 const quoteForm = document.getElementById('flight-form')
 const outboundAirport = document.getElementById('outbound-terminal')
@@ -35,8 +36,6 @@ fetch(URL_AIRLINE)
     )}
 )
 
-
-
 roundTrip.addEventListener('change', (event) => {
     if (event.currentTarget.checked) {
         returnDate.disabled = false
@@ -48,15 +47,10 @@ roundTrip.addEventListener('change', (event) => {
     }
 })
 
-
-
 quoteForm.addEventListener('submit', event => {
     event.preventDefault()
     renderInputs(outboundAirport.value, arrivalAirport.value, leaveDate.value, returnDate.value)
 })
-
-date.textContent = today
-
 
 function renderInputs(origin, destination, departingDate, returnDate = '') {
     const URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/${origin}/${destination}/${departingDate}/${returnDate}`
@@ -99,15 +93,6 @@ function renderQuotes(data,origin, destination, returnDate){
         let flightIdDep = quote.OutboundLeg.CarrierIds[0]
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightDirect = quote.Direct ? `Direct Flight` : `Connecting Flight`
-
-        // let [flightIdRet, flightRet] = (() => {
-        //     if (returnDate) {
-        //         return [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)]
-        //     }
-        //     else {
-        //         return ['','']
-        //     }
-        // })()
         let [flightIdRet, flightRet] = returnDate ? [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)] : ['','']
 
         carrierArr.forEach(elem => {
