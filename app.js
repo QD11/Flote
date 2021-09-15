@@ -99,7 +99,7 @@ function renderQuotes(data,origin, destination, returnDate){
         const flightPrice = quote.MinPrice
         let flightIdDep = quote.OutboundLeg.CarrierIds[0]
         const flightDep = quote.OutboundLeg.DepartureDate
-        const flightDirect = quote.Direct ? `Direct Flight` : `Flight Stops`
+        const flightDirect = quote.Direct ? `Direct Flight` : `Connecting Flight`
 
         let [flightIdRet, flightRet] = (() => {
             if (returnDate) {
@@ -219,7 +219,8 @@ function createCard(flightInfo, button, parentNode) {
     }
     parentNode.appendChild(flightCard)
 }
-//renderInputs('IAH','LAX','2021-09-15','')
+
+renderInputs('IAH','FWA','anytime','')
 
 
 
