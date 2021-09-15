@@ -14,7 +14,15 @@ body{
   margin:10px
 }
 
+#del-button{
+  background-color: red;
+  padding: 10px;
+}
 
+#save-button{
+  background-color: rgb(95, 250, 95);
+  padding: 10px;
+}
 
 #flight-form{
     text-align: center;
@@ -59,11 +67,6 @@ body{
   .flight-image{
     width: 100px;
     height: 100px;
-  }
-
-  button{
-    background-color: rgb(95, 250, 95);
-    padding: 10px;
   }
 
   #user-saves{

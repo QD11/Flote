@@ -70,9 +70,8 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
     })
     .then(response => response.json())
     .then(data => renderQuotes(data, origin, destination, returnDate))
-    .catch(err => {
-	console.error(err);
-    });
+    // .catch(err => {
+	// console.error(err);});
 }
 
 
@@ -101,14 +100,15 @@ function renderQuotes(data,origin, destination, returnDate){
         const flightDep = quote.OutboundLeg.DepartureDate
         const flightDirect = quote.Direct ? `Direct Flight` : `Connecting Flight`
 
-        let [flightIdRet, flightRet] = (() => {
-            if (returnDate) {
-                return [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)]
-            }
-            else {
-                return ['','']
-            }
-        })()
+        // let [flightIdRet, flightRet] = (() => {
+        //     if (returnDate) {
+        //         return [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)]
+        //     }
+        //     else {
+        //         return ['','']
+        //     }
+        // })()
+        let [flightIdRet, flightRet] = returnDate ? [quote.InboundLeg.CarrierIds[0], quote.InboundLeg.DepartureDate.slice(0,10)] : ['','']
 
         carrierArr.forEach(elem => {
             if(flightIdDep === elem.CarrierId) {
@@ -169,8 +169,9 @@ function createCard(flightInfo, button, parentNode) {
     displayDirect.textContent = flightInfo.direct
 
     const saveBttn = document.createElement('button')
+    saveBttn.id = 'save-Button'
     saveBttn.textContent = 'Save Quote!'
-    saveBttn.addEventListener('click', () => {
+    saveBttn.addEventListener('click', (event) => {
         fetch(URL_MAIN, {
             method: "POST",
             headers: {
@@ -196,6 +197,7 @@ function createCard(flightInfo, button, parentNode) {
     })
 
     const delBttn = document.createElement('button')
+    delBttn.id = 'del-button'
     delBttn.textContent = 'Delete Quote'
     delBttn.addEventListener('click', () => {
         flightCard.remove()
@@ -220,7 +222,7 @@ function createCard(flightInfo, button, parentNode) {
     parentNode.appendChild(flightCard)
 }
 
-renderInputs('IAH','FWA','anytime','')
+//renderInputs('IAH','FWA','anytime','')
 
 
 
