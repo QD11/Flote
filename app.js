@@ -107,7 +107,9 @@ function renderQuotes(data,origin, destination, returnDate){
         })
 
         const imgLinkDep = airlines.find(x => x.name == flightIdDep).image
-        const imgLinkRet = returnDate ? airlines.find(x => x.name == flightRet).image :  ''
+        
+        const imgLinkRet = returnDate ? airlines.find(x => x.name == flightIdRet).image :  ''
+
 
         const flightInfo = {
             nameDep : flightIdDep,
@@ -144,7 +146,7 @@ function createCard(flightInfo, button, parentNode) {
 
     const flightImgRet = document.createElement('img')
     flightImgRet.className = 'flight-image'
-    flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : 'https://komonews.com/resources/media/cfb385c3-b38c-49d1-a9d4-17b5fcf95d02-medium16x9_boeing_747_8_cargo.jpg?1477596133113'
+    flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : ''
 
 
     const flightNameDep = document.createElement('h1')
@@ -199,12 +201,20 @@ function createCard(flightInfo, button, parentNode) {
             method: "DELETE",
         });
     }
-
-    if (button === 'save'){
-        flightCard.append(flightImgDep, flightImgRet, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
-    } else {
-        flightCard.append(flightImgDep, flightImgRet, flightCities, displayPrice, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, delBttn)
+    if(flightInfo.arrival){
+        if (button === 'save'){
+            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightImgRet, flightNameRet, displayReturn, displayDirect, saveBttn)
+        } else {
+            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightImgRet, flightNameRet, displayReturn, displayDirect, delBttn)
+        }
+    }else{
+        if (button === 'save'){
+            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, saveBttn)
+        } else {
+            flightCard.append( flightCities, displayPrice,flightImgDep, flightNameDep, displayDeparture, flightNameRet, displayReturn, displayDirect, delBttn)
+        }
     }
+  
     parentNode.appendChild(flightCard)
 }
 
