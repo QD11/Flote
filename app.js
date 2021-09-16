@@ -10,7 +10,10 @@ function initMap() { //Google Map initial function
     const states = document.getElementById('states')
     
     let options = {
-        types: ['(Cities)']
+        types: ['(cities)'],
+        componentRestrictions: {
+            country: "USA",
+        }
     }
     
     const cities = document.querySelector('#map-cities')
