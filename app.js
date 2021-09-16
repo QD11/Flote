@@ -142,9 +142,6 @@ const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 const saveQuoteTitle = document.querySelector('#user-saves')
 const selectCities = document.querySelector('#map-cities')
 
-
-
-
 fetch(URL_MAIN)
 .then(resp => resp.json())
 .then(data => {
@@ -193,8 +190,6 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
     })
     .then(response => response.json())
     .then(data => renderQuotes(data, origin, destination, returnDate))
-    // .catch(err => {
-	// console.error(err);});
 }
 
 function renderQuotes(data,origin, destination, returnDate){
@@ -234,7 +229,8 @@ function renderQuotes(data,origin, destination, returnDate){
             }
         })
 
-        const imgLinkDep = airlines.find(x => x.name == flightIdDep).image
+        //This works but fix it later. It is messy
+        const imgLinkDep = airlines.find(x => x.name == flightIdDep) ? airlines.find(x => x.name == flightIdDep).image : ''
         
         const imgLinkRet = returnDate ? airlines.find(x => x.name == flightIdRet).image :  ''
 
