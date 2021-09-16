@@ -1,14 +1,35 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbo8U-Dh4zFL32eaxln4NyfPf48cqbFIo&callback=initMap&libraries=&v=weekly"></script>
     <script defer src="app.js"></script>
     <title>Flight Quote</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 400px;
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body>
     <div>
+        <select name="states" id="states">
+            <option style="display: none">--Choose a State--</option>
+            <option value="California">California</option>
+            <option value="Texas">Texas</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+        </select>
         <div id=flight-form-container>
             <!-- flight-form container -->
             <form id='flight-form'>
@@ -28,6 +49,9 @@
                 <button id='quote-bttn'>Get Quotes</button> 
             </form>
         </div>
+        <div id="map"></div>
+        <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbo8U-Dh4zFL32eaxln4NyfPf48cqbFIo&callback=initMap&libraries=&v=weekly"></script> -->
+        <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbo8U-Dh4zFL32eaxln4NyfPf48cqbFIo&libraries=&v=weekly"></script> -->
         <!-- we render flight quotes here for now -->
         <div id=flight-render-container></div>
         <div id='user-saves'>USER SAVES</div>

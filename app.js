@@ -1,5 +1,53 @@
+function initMap() { //Google Map initial function
+    const location = { //location of middle of US
+    lat: 37.8,
+    lng: -96
+    }
+    const map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: location
+    })
+    const states = document.getElementById('states')
+    states.addEventListener('change',() => {
+        const state = states.value
+        const arrayOfObjects = [
+            {
+                name : "LAX",
+                latitude : 33.9416,
+                longitude : -118.4085
+            },
+            {
+                name : "SFO",
+                latitude: 38,
+                longitude: -122
+            },
+            {
+                name: "SNA",
+                latitude: 33.6762,
+                longitude: -117.8675
+            }
+        ]
+        arrayOfObjects.forEach(element => {
+            console.log('hi')
+            const location = {
+                lat: 37.8,
+                lng: -96
+            }
+            new google.maps.Marker({
+                position : {
+                    lat : element.latitude,
+                    lng : element.longitude 
+                },
+            map,
+            title: element.name
+            })
+        })
+    })
+}
+
 const URL_MAIN = 'http://localhost:3000/userquotes'
 const URL_AIRLINE = 'http://localhost:3000/airlines'
+const URL_AIRPORT = 'http://localhost:3000/airports'
 
 const today = new Date().toISOString().slice(0, 10)
 const tomorrow = new Date() 
@@ -17,6 +65,12 @@ leaveDate.min = today
 const returnDate = document.getElementById('return-date')
 const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
+
+fetch(URL_AIRPORT)
+.then(resp => resp.json())
+.then(data => {
+        console.log(data.filter(x => (x.state === 'Texas' && x.city === 'Houston')))
+    })
 
 fetch(URL_MAIN)
 .then(resp => resp.json())
@@ -68,7 +122,6 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
 	// console.error(err);});
 }
 
-
 function renderQuotes(data,origin, destination, returnDate){
     while (flightContainer.firstChild) {
         flightContainer.removeChild(flightContainer.firstChild);
@@ -110,8 +163,6 @@ function renderQuotes(data,origin, destination, returnDate){
         
         const imgLinkRet = returnDate ? airlines.find(x => x.name == flightIdRet).image :  ''
 
-
-
         const flightInfo = {
             nameDep : flightIdDep,
             nameRet : flightIdRet,
@@ -123,7 +174,6 @@ function renderQuotes(data,origin, destination, returnDate){
             arrival : returnDate,
             direct : flightDirect  
         }
-        
         createCard(flightInfo, 'save', flightContainer)
     })
 }}
@@ -149,7 +199,6 @@ function createCard(flightInfo, button, parentNode) {
     const flightImgRet = document.createElement('img')
     flightImgRet.className = 'flight-image'
     flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : ''
-
 
     const flightNameDep = document.createElement('h1')
     flightNameDep.textContent = flightInfo.nameDep
@@ -180,8 +229,6 @@ function createCard(flightInfo, button, parentNode) {
     topDiv.append(flightCities, displayPrice)
     departDiv.append(flightImgDep, flightNameDep, displayDeparture)
     returnDiv.append(flightImgRet, flightNameRet, displayReturn)
-
-
 
     const saveBttn = document.createElement('button')
     saveBttn.id = 'save-Button'
@@ -223,7 +270,6 @@ function createCard(flightInfo, button, parentNode) {
         });
     }
 
-   
     if(flightInfo.arrival){
         if (button === 'save'){
             flightCard.append( topDiv, departDiv, hr, returnDiv ,displayDirect, saveBttn)
@@ -237,7 +283,6 @@ function createCard(flightInfo, button, parentNode) {
             flightCard.append( topDiv, departDiv,  displayDirect, delBttn)
         }
     }
-  
     parentNode.appendChild(flightCard)
 }
 
