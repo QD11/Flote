@@ -13,13 +13,7 @@
         * {
             margin: 0;
             padding: 0;
-        }
-        #map {
-            height: 400px;
-            width: 75%;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        }      
     </style>
 </head>
 <body>
@@ -32,14 +26,15 @@
                 <label for="outbound-terminal">Departing Airport: </label>
                 <!-- <input type="text" name="outbound-terminal" id="outbound-terminal">  -->
                 <select name="outbound-terminal" id="outbound-terminal"></select>
-                <label for="arrival-terminal">Arriving Airport: </label>
-                <select name="arrival-terminal" id="arrival-terminal"></select> <br>
                 <!-- <input type="text" name="arrival-terminal" id="arrival-terminal"> <br> -->
                 <label for="departing-date">Departing Date: </label>
                 <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
                 min="2021-09-13">
+                <br>
                 <label for="arriving-city">Arriving City</label>
                 <input type="text" id="arriving-city">
+                <label for="arrival-terminal">Arriving Airport: </label>
+                <select name="arrival-terminal" id="arrival-terminal"></select>
                 <label for="returning-date">Returning Date: </label>
                 <input type="date" name='return-date' id='return-date' disabled="disabled">
                 <br>

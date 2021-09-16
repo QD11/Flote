@@ -93,31 +93,36 @@ function initMap() { //Google Map initial function
         const depStateShort = depCityValue.split(",")[1].slice(1)
         const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
         const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
-        console.log(airPortData)
-
+        const airportOption = document.createElement('option')
+        
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
         }
 
-        markerArray.forEach(marker => marker.setMap(null))
-        airPortData.forEach(d => {
-            const airportOption = document.createElement('option')
-            airportOption.textContent = d.name + ` (${d.code})`
-            airportOption.value = d.code
+        if(airPortData.length === 0){
+            console.log('k')
+            airportOption.textContent = `No Airports In ${depCity} ${depState}`
             selectAirportElement.appendChild(airportOption)
-
-            const marker = new google.maps.Marker({
-                position : {
-                    lat : parseFloat(d.lat),
-                    lng : parseFloat(d.lon)
-                },
-                map,
-                title:  d.name + ` (${d.code})`
-            })
-            markerArray.push(marker)
-        })
+        }else{     
+                markerArray.forEach(marker => marker.setMap(null))
+                airPortData.forEach(d => {
+                    
+                    airportOption.textContent = d.name + ` (${d.code})`
+                    airportOption.value = d.code
+                    selectAirportElement.appendChild(airportOption)   
+                    const marker = new google.maps.Marker({
+                        position : {
+                            lat : parseFloat(d.lat),
+                            lng : parseFloat(d.lon)
+                        },
+                        map,
+                        title:  d.name + ` (${d.code})`
+                    })
+                    markerArray.push(marker)
+                })
+            }
+        }
     }
-}
 
 const URL_MAIN = 'http://localhost:3000/userquotes'
 const URL_AIRLINE = 'http://localhost:3000/airlines'
@@ -141,6 +146,9 @@ const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 const saveQuoteTitle = document.querySelector('#user-saves')
 const selectCities = document.querySelector('#map-cities')
+
+
+
 
 fetch(URL_MAIN)
 .then(resp => resp.json())
@@ -190,6 +198,8 @@ function renderInputs(origin, destination, departingDate, returnDate = '') {
     })
     .then(response => response.json())
     .then(data => renderQuotes(data, origin, destination, returnDate))
+    // .catch(err => {
+	// console.error(err);});
 }
 
 function renderQuotes(data,origin, destination, returnDate){
@@ -228,10 +238,8 @@ function renderQuotes(data,origin, destination, returnDate){
                 }
             }
         })
-
-        //This works but fix it later. It is messy
         const imgLinkDep = airlines.find(x => x.name == flightIdDep) ? airlines.find(x => x.name == flightIdDep).image : ''
-        
+           
         const imgLinkRet = returnDate ? airlines.find(x => x.name == flightIdRet).image :  ''
 
         const flightInfo = {

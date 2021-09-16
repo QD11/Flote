@@ -178,6 +178,11 @@ hr{
   color: rgb(12, 14, 15);
 }
 
-#map{
-  margin-bottom: 20px;
+#map {
+  height: 450px;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  border: 5px solid rgb(0, 0, 0);
 }
