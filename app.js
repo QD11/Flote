@@ -36,21 +36,7 @@ function initMap() { //Google Map initial function
 
 
 
-    function grabAirportData(cityElement, autoComplete, selectAirportElement){
-        const depCityVal = autoComplete.getPlace()
-        const depCityValue = cityElement.value
-        const depCity = depCityValue.split(",")[0]
-        const depStateShort = depCityValue.split(",")[1].slice(1)
-        const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
-        const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
-        
-        airPortData.forEach(d => {
-            const airportOption = document.createElement('option')
-            airportOption.textContent = d.name + ` (${d.code})`
-            airportOption.value = d.code
-            selectAirportElement.appendChild(airportOption)
-        })
-    }
+
     
     google.maps.event.addListener(depAutocomplete, 'place_changed', () => {
         grabAirportData(depCities, depAutocomplete, selectDepAirport)
@@ -97,6 +83,26 @@ function initMap() { //Google Map initial function
     //     })
     // }
     // )
+
+    function grabAirportData(cityElement, autoComplete, selectAirportElement){
+        const depCityVal = autoComplete.getPlace()
+        const depCityValue = cityElement.value
+        const depCity = depCityValue.split(",")[0]
+        const depStateShort = depCityValue.split(",")[1].slice(1)
+        const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
+        const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
+
+        while (selectAirportElement.firstChild) {
+            selectAirportElement.removeChild(selectAirportElement.firstChild);
+        }
+        
+        airPortData.forEach(d => {
+            const airportOption = document.createElement('option')
+            airportOption.textContent = d.name + ` (${d.code})`
+            airportOption.value = d.code
+            selectAirportElement.appendChild(airportOption)
+        })
+    }
 }
 
 const URL_MAIN = 'http://localhost:3000/userquotes'
