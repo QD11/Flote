@@ -38,12 +38,14 @@ function initMap() { //Google Map initial function
 
 
     
+    const depMarkerArray = []
     google.maps.event.addListener(depAutocomplete, 'place_changed', () => {
-        grabAirportData(depCities, depAutocomplete, selectDepAirport)
+        grabAirportData(depCities, depAutocomplete, selectDepAirport, depMarkerArray)
     })
 
+    const arrvMarkerArray = []
     google.maps.event.addListener(arrvAutocomplete, 'place_changed', () => {
-        grabAirportData(arrvCities, arrvAutocomplete, selectArrvAirport)
+        grabAirportData(arrvCities, arrvAutocomplete, selectArrvAirport, arrvMarkerArray)
     })
     
 
@@ -84,23 +86,35 @@ function initMap() { //Google Map initial function
     // }
     // )
 
-    function grabAirportData(cityElement, autoComplete, selectAirportElement){
+    function grabAirportData(cityElement, autoComplete, selectAirportElement, markerArray){
         const depCityVal = autoComplete.getPlace()
         const depCityValue = cityElement.value
         const depCity = depCityValue.split(",")[0]
         const depStateShort = depCityValue.split(",")[1].slice(1)
         const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
         const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
+        console.log(airPortData)
 
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
         }
-        
+
+        markerArray.forEach(marker => marker.setMap(null))
         airPortData.forEach(d => {
             const airportOption = document.createElement('option')
             airportOption.textContent = d.name + ` (${d.code})`
             airportOption.value = d.code
             selectAirportElement.appendChild(airportOption)
+
+            const marker = new google.maps.Marker({
+                position : {
+                    lat : parseFloat(d.lat),
+                    lng : parseFloat(d.lon)
+                },
+                map,
+                title:  d.name + ` (${d.code})`
+            })
+            markerArray.push(marker)
         })
     }
 }

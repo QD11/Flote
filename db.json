@@ -13879,26 +13879,6 @@
       "carriers": "13"
     },
     {
-      "code": "XNY",
-      "lat": "42.8767",
-      "lon": "-77.8826",
-      "name": "York",
-      "city": "New York",
-      "state": "New York",
-      "country": "United States",
-      "woeid": "2524848",
-      "tz": "America/New_York",
-      "phone": "",
-      "type": "Airports",
-      "email": "",
-      "url": "",
-      "runway_length": null,
-      "elev": null,
-      "icao": "",
-      "direct_flights": "1",
-      "carriers": "1"
-    },
-    {
       "code": "XVG",
       "lat": "46.9929",
       "lon": "-94.2075",
@@ -14681,7 +14661,7 @@
     {
       "code": "ZYP",
       "lat": "40.7501",
-      "lon": "40.7501",
+      "lon": "-73.968285",
       "name": "Penn Station",
       "city": "New York",
       "state": "New York",
