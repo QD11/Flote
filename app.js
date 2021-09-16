@@ -1,3 +1,5 @@
+
+
 function initMap() { //Google Map initial function
     const location = { //location of middle of US
     lat: 37.8,
@@ -15,47 +17,86 @@ function initMap() { //Google Map initial function
             country: "USA",
         }
     }
+
+    const airPortList = []
+
+    fetch(URL_AIRPORT)
+    .then(resp => resp.json())
+    .then(data => {
+        data.forEach(item => airPortList.push(item))
+    })
+
     
-    const cities = document.querySelector('#map-cities')
-    console.log(cities)
-    let autocomplete = new google.maps.places.Autocomplete(cities, options)
+    const depCities = document.querySelector('#departing-city')
+    const depAutocomplete = new google.maps.places.Autocomplete(depCities, options)
+    const selectDepAirport = document.querySelector('#outbound-terminal')
+    const arrvCities = document.querySelector('#arriving-city')
+    const arrvAutocomplete = new google.maps.places.Autocomplete(arrvCities, options)
+    const selectArrvAirport = document.querySelector('#arrival-terminal')
+
+
+
+    function grabAirportData(cityElement, autoComplete, selectAirportElement){
+        const depCityVal = autoComplete.getPlace()
+        const depCityValue = cityElement.value
+        const depCity = depCityValue.split(",")[0]
+        const depStateShort = depCityValue.split(",")[1].slice(1)
+        const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
+        const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
+        
+        airPortData.forEach(d => {
+            const airportOption = document.createElement('option')
+            airportOption.textContent = d.name + ` (${d.code})`
+            airportOption.value = d.code
+            selectAirportElement.appendChild(airportOption)
+        })
+    }
+    
+    google.maps.event.addListener(depAutocomplete, 'place_changed', () => {
+        grabAirportData(depCities, depAutocomplete, selectDepAirport)
+    })
+
+    google.maps.event.addListener(arrvAutocomplete, 'place_changed', () => {
+        grabAirportData(arrvCities, arrvAutocomplete, selectArrvAirport)
+    })
     
 
-    states.addEventListener('change',() => {
-        const state = states.value
-        const arrayOfObjects = [
-            {
-                name : "LAX",
-                latitude : 33.9416,
-                longitude : -118.4085
-            },
-            {
-                name : "SFO",
-                latitude: 38,
-                longitude: -122
-            },
-            {
-                name: "SNA",
-                latitude: 33.6762,
-                longitude: -117.8675
-            }
-        ]
-        arrayOfObjects.forEach(element => {
-            console.log('hi')
-            const location = {
-                lat: 37.8,
-                lng: -96
-            }
-            new google.maps.Marker({
-                position : {
-                    lat : element.latitude,
-                    lng : element.longitude 
-                },
-            map,
-            title: element.name
-            })
-        })
-    })
+    // states.addEventListener('change',() => {
+    //     const state = states.value
+    //     const arrayOfObjects = [
+    //         {
+    //             name : "LAX",
+    //             latitude : 33.9416,
+    //             longitude : -118.4085
+    //         },
+    //         {
+    //             name : "SFO",
+    //             latitude: 38,
+    //             longitude: -122
+    //         },
+    //         {
+    //             name: "SNA",
+    //             latitude: 33.6762,
+    //             longitude: -117.8675
+    //         }
+    //     ]
+    //     arrayOfObjects.forEach(element => {
+    //         console.log('hi')
+    //         const location = {
+    //             lat: 37.8,
+    //             lng: -96
+    //         }
+    //         new google.maps.Marker({
+    //             position : {
+    //                 lat : element.latitude,
+    //                 lng : element.longitude 
+    //             },
+    //         map,
+    //         title: element.name
+    //         })
+    //     })
+    // }
+    // )
 }
 
 const URL_MAIN = 'http://localhost:3000/userquotes'
@@ -79,14 +120,10 @@ const returnDate = document.getElementById('return-date')
 const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 const saveQuoteTitle = document.querySelector('#user-saves')
+const selectCities = document.querySelector('#map-cities')
 
 
 
-fetch(URL_AIRPORT)
-.then(resp => resp.json())
-.then(data => {
-        console.log(data.filter(x => (x.state === 'Texas' && x.city === 'Houston')))
-    })
 
 fetch(URL_MAIN)
 .then(resp => resp.json())

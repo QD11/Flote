@@ -24,24 +24,22 @@
 </head>
 <body>
     <div>
-        <select name="states" id="states">
-            <option style="display: none">--Choose a State--</option>
-            <option value="California">California</option>
-            <option value="Texas">Texas</option>
-            <option value="Virginia">Virginia</option>
-            <option value="Washington">Washington</option>
-        </select>
         <div id=flight-form-container>
             <!-- flight-form container -->
             <form id='flight-form'>
-                <input type="text" id='map-cities'>
+                <label for="departing-city">Departing City</label>
+                <input type="text" id='departing-city'>
                 <label for="outbound-terminal">Departing Airport: </label>
-                <input type="text" name="outbound-terminal" id="outbound-terminal"> 
+                <!-- <input type="text" name="outbound-terminal" id="outbound-terminal">  -->
+                <select name="outbound-terminal" id="outbound-terminal"></select>
                 <label for="arrival-terminal">Arriving Airport: </label>
-                <input type="text" name="arrival-terminal" id="arrival-terminal"> <br>
+                <select name="arrival-terminal" id="arrival-terminal"></select> <br>
+                <!-- <input type="text" name="arrival-terminal" id="arrival-terminal"> <br> -->
                 <label for="departing-date">Departing Date: </label>
                 <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
                 min="2021-09-13">
+                <label for="arriving-city">Arriving City</label>
+                <input type="text" id="arriving-city">
                 <label for="returning-date">Returning Date: </label>
                 <input type="date" name='return-date' id='return-date' disabled="disabled">
                 <br>
