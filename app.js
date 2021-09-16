@@ -65,6 +65,9 @@ leaveDate.min = today
 const returnDate = document.getElementById('return-date')
 const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
+const saveQuoteTitle = document.querySelector('#user-saves')
+
+
 
 fetch(URL_AIRPORT)
 .then(resp => resp.json())
@@ -77,6 +80,8 @@ fetch(URL_MAIN)
 .then(data => {
     data.forEach(element => {
         createCard(element, 'delete', saveQuoteContainer)
+        if(element) saveQuoteTitle.style.display = 'block'
+
     })
 })
 
@@ -226,12 +231,12 @@ function createCard(flightInfo, button, parentNode) {
 
     
     
-    topDiv.append(flightCities, displayPrice)
+    topDiv.append(displayDirect,flightCities, displayPrice)
     departDiv.append(flightImgDep, flightNameDep, displayDeparture)
     returnDiv.append(flightImgRet, flightNameRet, displayReturn)
 
     const saveBttn = document.createElement('button')
-    saveBttn.id = 'save-Button'
+    saveBttn.id = 'save-button'
     saveBttn.textContent = 'Save Quote!'
     saveBttn.addEventListener('click', (event) => {
         fetch(URL_MAIN, {
@@ -245,6 +250,7 @@ function createCard(flightInfo, button, parentNode) {
         .then(function(flightInfo) {
         console.log(flightInfo)
         saveBttn.remove()
+        saveQuoteTitle.style.display = 'block'
         const delBttn = document.createElement('button')
         delBttn.id = 'del-button'
         delBttn.textContent = 'Delete Quote'
@@ -265,6 +271,7 @@ function createCard(flightInfo, button, parentNode) {
 
     function delQuote(flightInfo) {
         flightCard.remove()
+        if(!saveQuoteContainer.flightCard) saveQuoteTitle.style.display = 'none'
         fetch(`${URL_MAIN}/${flightInfo.id}`, {
             method: "DELETE",
         });
@@ -272,15 +279,15 @@ function createCard(flightInfo, button, parentNode) {
 
     if(flightInfo.arrival){
         if (button === 'save'){
-            flightCard.append( topDiv, departDiv, hr, returnDiv ,displayDirect, saveBttn)
+            flightCard.append( topDiv, departDiv, hr, returnDiv ,saveBttn)
         } else {
-            flightCard.append( topDiv, departDiv, hr, returnDiv, displayDirect, delBttn)
+            flightCard.append( topDiv, departDiv, hr, returnDiv,delBttn)
         }
     }else{
         if (button === 'save'){
-            flightCard.append( topDiv, departDiv, displayDirect, saveBttn)
+            flightCard.append( topDiv, departDiv,saveBttn)
         } else {
-            flightCard.append( topDiv, departDiv,  displayDirect, delBttn)
+            flightCard.append( topDiv, departDiv,delBttn)
         }
     }
     parentNode.appendChild(flightCard)
