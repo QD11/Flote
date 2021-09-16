@@ -8,6 +8,16 @@ function initMap() { //Google Map initial function
     center: location
     })
     const states = document.getElementById('states')
+    
+    let options = {
+        types: ['(Cities)']
+    }
+    
+    const cities = document.querySelector('#map-cities')
+    console.log(cities)
+    let autocomplete = new google.maps.places.Autocomplete(cities, options)
+    
+
     states.addEventListener('change',() => {
         const state = states.value
         const arrayOfObjects = [
