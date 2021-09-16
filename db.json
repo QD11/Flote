@@ -41,32 +41,7 @@
       "image": "https://1000logos.net/wp-content/uploads/2021/04/Allegiant-Air-logo-768x432.png"
     }
   ],
-  "userquotes": [
-    {
-      "nameDep": "Alaska Airlines",
-      "nameRet": "",
-      "cities": "Houston ✈ San Francisco",
-      "imgDep": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
-      "imgRet": "",
-      "price": 293,
-      "departure": "2021-09-16",
-      "arrival": "",
-      "direct": "Connecting Flight",
-      "id": 1
-    },
-    {
-      "nameDep": "Alaska Airlines",
-      "nameRet": "Alaska Airlines",
-      "cities": "San Francisco ✈ Los Angeles",
-      "imgDep": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
-      "imgRet": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
-      "price": 326,
-      "departure": "2021-09-16",
-      "arrival": "2021-09-17",
-      "direct": "Direct Flight",
-      "id": 2
-    }
-  ],
+  "userquotes": [],
   "airports": [
     {
       "code": "ABE",

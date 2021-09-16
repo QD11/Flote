@@ -179,6 +179,12 @@ function initMap() { //Google Map initial function
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}
         })
 
+        const newLat = (parseFloat(departInfo.lat) + parseFloat(arriveInfo.lat))/2
+        const newLng = (parseFloat(departInfo.lon) + parseFloat(arriveInfo.lon))/2
+        console.log(newLat, newLng)
+        const newLatLng = new google.maps.LatLng(newLat, newLng)
+        map.setCenter(newLatLng)
+
     })
 
     function renderInputs(origin, destination, departingDate, returnDate = '') {
