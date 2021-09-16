@@ -161,7 +161,7 @@ function createCard(flightInfo, button, parentNode) {
     displayPrice.className = 'airline'
     displayPrice.textContent = `💲${flightInfo.price}` 
 
-    const displayDirect = document.createElement('p')
+    const displayDirect = document.createElement('h3')
     displayDirect.textContent = flightInfo.direct
 
     const hr = document.createElement('hr')
@@ -241,7 +241,7 @@ function createCard(flightInfo, button, parentNode) {
     parentNode.appendChild(flightCard)
 }
 
-renderInputs('IAH','FWA','anytime','')
+// renderInputs('IAH','FWA','anytime','')
 
 
 
