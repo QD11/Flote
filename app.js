@@ -66,12 +66,12 @@ function initMap() { //Google Map initial function
     
 
     function grabAirportData(cityElement, autoComplete, selectAirportElement, markerArray, path){
-        const CityVal = autoComplete.getPlace()
-        const CityValue = cityElement.value
-        const City = CityValue.split(",")[0]
-        const StateShort = CityValue.split(",")[1].slice(1)
-        const State = CityVal.address_components.filter(s => s.short_name === StateShort)[0].long_name
-        const airPortData = airPortList.filter(i => i.city === City && i.state === State)
+        const cityVal = autoComplete.getPlace()
+        const cityValue = cityElement.value
+        const city = cityValue.split(",")[0]
+        const stateShort = cityValue.split(",")[1].slice(1)
+        const state = cityVal.address_components.filter(s => s.short_name === stateShort)[0].long_name
+        const airPortData = airPortList.filter(i => i.city === city && i.state === state)
 
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
@@ -80,7 +80,7 @@ function initMap() { //Google Map initial function
         if(airPortData.length === 0){
             selectAirportElement.disabled = true
             const showNoAirport = document.createElement('option')
-            showNoAirport.textContent = `No Airports In ${City} ${State}`
+            showNoAirport.textContent = `No Airports In ${city} ${state}`
             selectAirportElement.appendChild(showNoAirport)
         }
         else{   
@@ -112,6 +112,15 @@ function initMap() { //Google Map initial function
                         title:  d.name + ` (${d.code})`,
                         icon: {                             
                             url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
+                    })
+                    const infoWindow = new google.maps.InfoWindow({
+                        content : d.name + ` (${d.code})`
+                    })
+                    marker.addListener("mouseover", function() {
+                        infoWindow.open(map, this)
+                    })
+                    marker.addListener("mouseout", function() {
+                        infoWindow.close()
                     })
                     markerArray.push(marker)
                     depMarkerArray.forEach(marker => {
@@ -198,6 +207,13 @@ function initMap() { //Google Map initial function
 
         const mapBound = new google.maps.LatLngBounds()
 
+        const infoWindowDep = new google.maps.InfoWindow({
+            content :  departInfo.name + ` (${departInfo.code})`
+        })
+        const infoWindowArr = new google.maps.InfoWindow({
+            content :  arriveInfo.name + ` (${arriveInfo.code})`
+        })
+
         depMarkerArray[0] = new google.maps.Marker({
             position : {
                 lat : parseFloat(departInfo.lat),
@@ -220,6 +236,20 @@ function initMap() { //Google Map initial function
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}
         })
 
+        depMarkerArray[0].addListener("mouseover", function() {
+            infoWindowDep.open(map, this)
+        })
+        depMarkerArray[0].addListener("mouseout", function() {
+            infoWindowDep.close()
+        })
+
+        arrvMarkerArray[0].addListener("mouseover", function() {
+            infoWindowArr.open(map, this)
+        })
+        arrvMarkerArray[0].addListener("mouseout", function() {
+            infoWindowArr.close()
+        })
+
         const depLoc = new google.maps.LatLng(parseFloat(departInfo.lat), parseFloat(departInfo.lon));
         const arrLoc = new google.maps.LatLng(parseFloat(arriveInfo.lat), parseFloat(arriveInfo.lon));
 
@@ -228,11 +258,21 @@ function initMap() { //Google Map initial function
 
         map.fitBounds(mapBound);
         map.panToBounds(mapBound);
+
+        removeOtherOptions(outboundAirport)
+        removeOtherOptions(arrivalAirport)
+
+        function removeOtherOptions(parentNode) {
+            parentNode.childNodes.forEach(option => {
+                if (option.value != parentNode.value) {
+                    option.remove()
+                }
+            })
+        }
     })
 
     function renderInputs(origin, destination, departingDate, returnDate = '') {
         const URL = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/${origin}/${destination}/${departingDate}/${returnDate}`
-        console.log(URL)
         fetch(URL, {
         "method": "GET",
         "headers": {
