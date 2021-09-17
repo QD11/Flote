@@ -246,7 +246,7 @@ function initMap() { //Google Map initial function
         }
         if (data.Quotes.length === 0){
             const noData = document.createElement('h1')
-            noData.innerText = '🚫'
+            noData.innerText = '🚫 No Data Available'
             noData.className = 'no-data'
             flightContainer.appendChild(noData)
         }
