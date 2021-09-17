@@ -45,14 +45,14 @@
     {
       "nameDep": "Alaska Airlines",
       "nameRet": "",
-      "cities": "San Francisco (SFO) ✈ Los Angeles (LAX)",
+      "cities": "Houston (HOU) ✈ Los Angeles (LAX)",
       "imgDep": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
       "imgRet": "",
-      "price": 166,
+      "price": 264,
       "departure": "2021-09-17",
       "arrival": "",
-      "direct": "Direct Flight",
-      "id": 1
+      "direct": "Connecting Flight",
+      "id": 2
     }
   ],
   "airports": [

@@ -92,7 +92,7 @@ function initMap() { //Google Map initial function
                     const airportOption = document.createElement('option')
                     airportOption.textContent = d.name + ` (${d.code})`                
                     airportOption.value = d.code
-                    selectAirportElement.appendChild(airportOption)   
+                    selectAirportElement.appendChild(airportOption)
                     const marker = (path === 'arrive') ? new google.maps.Marker({
                         position : {
                             lat : parseFloat(d.lat),
@@ -125,7 +125,11 @@ function initMap() { //Google Map initial function
                     map.fitBounds(mapBound2);       
                     map.panToBounds(mapBound2);    
                 })
-                
+                for (let i = 0; i < markerArray.length; i++) {
+                    markerArray[i].addListener("click", () => {
+                        selectAirportElement.selectedIndex = i
+                    })
+                }
                 if(selectDepAirport.value && selectArrvAirport.value){
                     quoteBttn.disabled = false
                     quoteBttn.style.background = "black"; 
@@ -160,8 +164,11 @@ function initMap() { //Google Map initial function
     roundTrip.addEventListener('change', (event) => {
         if (event.currentTarget.checked) {
             returnDate.disabled = false
-            returnDate.min = newTomorrow
-            returnDate.value = newTomorrow
+            const valueLeaveDate = new Date(leaveDate.value)
+            valueLeaveDate.setDate(valueLeaveDate.getDate() + 1)
+            const tomorrowDay = valueLeaveDate.toISOString().slice(0,10)
+            returnDate.min = tomorrowDay
+            returnDate.value = tomorrowDay
         } else {
             returnDate.value = ''
             returnDate.disabled = true
@@ -173,12 +180,11 @@ function initMap() { //Google Map initial function
         valueLeaveDate.setDate(valueLeaveDate.getDate() + 1)
         const tomorrowDay = valueLeaveDate.toISOString().slice(0,10)
         returnDate.min = tomorrowDay
-        // if (returnDate.value) {
-        //     if( (new Date(returnDate.value).getTime() < new Date(tomorrowDay).getTime())) {
-        //         console.log('yeet')
-        //         returnDate.value == tomorrowDay
-        //     }
-        // }
+        if (returnDate.value) {
+            if( (new Date(returnDate.value).getTime() < new Date(tomorrowDay).getTime())) {
+                returnDate.value = tomorrowDay
+            }
+        }
     })
 
     quoteForm.addEventListener('submit', event => {
