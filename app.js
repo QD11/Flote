@@ -27,7 +27,7 @@ function initMap() { //Google Map initial function
     lng: -96
     }
     const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+    zoom: 4.5,
     center: location
     })
     
@@ -71,7 +71,7 @@ function initMap() { //Google Map initial function
         const depStateShort = depCityValue.split(",")[1].slice(1)
         const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
         const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
-        console.log(airPortData)
+
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
         }
@@ -81,10 +81,12 @@ function initMap() { //Google Map initial function
             const showNoAirport = document.createElement('option')
             showNoAirport.textContent = `No Airports In ${depCity} ${depState}`
             selectAirportElement.appendChild(showNoAirport)
-        }else{   
-                selectAirportElement.disabled = false  
+        }
+        else{   
+                selectAirportElement.disabled = false
                 markerArray.forEach(marker => marker.setMap(null))
                 markerArray.length = 0
+                const mapBound2 = new google.maps.LatLngBounds()
                 airPortData.forEach(d => {
                     const airportOption = document.createElement('option')
                     airportOption.textContent = d.name + ` (${d.code})`                
@@ -111,6 +113,16 @@ function initMap() { //Google Map initial function
                             url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
                     })
                     markerArray.push(marker)
+                    depMarkerArray.forEach(marker => {
+                        const loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                        mapBound2.extend(loc)
+                    })
+                    arrvMarkerArray.forEach(marker => {
+                        const loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+                        mapBound2.extend(loc)
+                    })
+                    map.fitBounds(mapBound2);       
+                    map.panToBounds(mapBound2);    
                 })
             }
         }
@@ -186,15 +198,6 @@ function initMap() { //Google Map initial function
 
         map.fitBounds(mapBound);
         map.panToBounds(mapBound);
-
-        // const newLat = (parseFloat(departInfo.lat) + parseFloat(arriveInfo.lat))/2
-        // const newLng = (parseFloat(departInfo.lon) + parseFloat(arriveInfo.lon))/2
-        // console.log(newLat, newLng)
-        // const newLatLng = new google.maps.LatLng(newLat, newLng)
-        // map.setCenter(newLatLng)
-
-
-
     })
 
     function renderInputs(origin, destination, departingDate, returnDate = '') {
@@ -284,11 +287,11 @@ function initMap() { //Google Map initial function
 
         const flightImgDep = document.createElement('img')
         flightImgDep.className = 'flight-image'
-        flightImgDep.src =  flightInfo.imgDep ? flightInfo.imgDep : 'https://komonews.com/resources/media/cfb385c3-b38c-49d1-a9d4-17b5fcf95d02-medium16x9_boeing_747_8_cargo.jpg?1477596133113'
+        flightImgDep.src =  flightInfo.imgDep ? flightInfo.imgDep : "depAirplane.png"
 
         const flightImgRet = document.createElement('img')
         flightImgRet.className = 'flight-image'
-        flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : ''
+        flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : "arrAirplane.png"
 
         const flightNameDep = document.createElement('h1')
         flightNameDep.textContent = flightInfo.nameDep
