@@ -101,7 +101,8 @@ function initMap() { //Google Map initial function
                         map,
                         title:  d.name + ` (${d.code})`,
                         icon: {                             
-                            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}
+                            url: "blue_48.png",
+                        }
                     }) : 
                     new google.maps.Marker({
                         position : {
@@ -111,16 +112,23 @@ function initMap() { //Google Map initial function
                         map,
                         title:  d.name + ` (${d.code})`,
                         icon: {                             
-                            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
+                            url: "red_48.png",
+                        }
                     })
                     const infoWindow = new google.maps.InfoWindow({
                         content : d.name + ` (${d.code})`
                     })
                     marker.addListener("mouseover", function() {
                         infoWindow.open(map, this)
+                        marker.setIcon({
+                            url: (path==="arrive"? "blue_80.png":"red_80.png"),
+                        })
                     })
                     marker.addListener("mouseout", function() {
                         infoWindow.close()
+                        marker.setIcon({
+                            url: (path==="arrive"? "blue_48.png":"red_48.png"),
+                        })
                     })
                     markerArray.push(marker)
                     depMarkerArray.forEach(marker => {
@@ -222,7 +230,7 @@ function initMap() { //Google Map initial function
             map,
             title:  departInfo.name + ` (${departInfo.code})`,
             icon: {                             
-                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"}
+                url: "red_80.png"}
         })
 
         arrvMarkerArray[0] = new google.maps.Marker({
@@ -233,7 +241,7 @@ function initMap() { //Google Map initial function
             map,
             title:  arriveInfo.name + ` (${arriveInfo.code})`,
             icon: {                             
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}
+                url: "blue_80.png"}
         })
 
         depMarkerArray[0].addListener("mouseover", function() {
