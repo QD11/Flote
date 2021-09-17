@@ -21,6 +21,7 @@ const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 const saveQuoteTitle = document.querySelector('#user-saves')
 const selectCities = document.querySelector('#map-cities')
 const quoteBttn = document.querySelector('#quote-bttn')
+const flightPathHolder = []
 
 function initMap() { //Google Map initial function
     const location = { //location of middle of US
@@ -75,6 +76,12 @@ function initMap() { //Google Map initial function
 
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
+        }
+
+        if (flightPathHolder.length === 1){
+            flightPathHolder[0].setMap(null)
+            flightPathHolder[0] = null
+            flightPathHolder.length = 0
         }
 
         if(airPortData.length === 0){
@@ -209,6 +216,12 @@ function initMap() { //Google Map initial function
         renderInputs(outboundAirport.value, arrivalAirport.value, leaveDate.value, returnDate.value)
         depMarkerArray.forEach(marker => marker.setMap(null))
         arrvMarkerArray.forEach(marker => marker.setMap(null))
+        
+        if (flightPathHolder.length === 1){
+            flightPathHolder[0].setMap(null)
+            flightPathHolder[0] = null
+            flightPathHolder.length = 0
+        }
 
         const departInfo = airPortList.find(x => x.code === outboundAirport.value)
         const arriveInfo = airPortList.find(x => x.code === arrivalAirport.value)
@@ -270,8 +283,30 @@ function initMap() { //Google Map initial function
         removeOtherOptions(outboundAirport)
         removeOtherOptions(arrivalAirport)
 
+        addFlightPath(departInfo, arriveInfo)
+
+        function addFlightPath(departInfo, arriveInfo) {
+            const flightPlanCoordinates = [
+                { lat: parseFloat(departInfo.lat), lng: parseFloat(departInfo.lon)},
+                { lat: parseFloat(arriveInfo.lat), lng: parseFloat(arriveInfo.lon)},
+            ]
+
+            let flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+            });
+
+            flightPathHolder.push(flightPath)
+
+            flightPath.setMap(map)
+        }
+
         function removeOtherOptions(parentNode) {
             parentNode.childNodes.forEach(option => {
+                console.log(option.value, parentNode.value)
                 if (option.value != parentNode.value) {
                     option.remove()
                 }
