@@ -365,7 +365,6 @@ function initMap() { //Google Map initial function
             })
             .then(resp => resp.json())
             .then(function(flightInfo) {
-            console.log(flightInfo)
             saveBttn.remove()
             saveQuoteTitle.style.display = 'block'
             const delBttn = document.createElement('button')
@@ -388,7 +387,7 @@ function initMap() { //Google Map initial function
 
         function delQuote(flightInfo) {
             flightCard.remove()
-            if(!saveQuoteContainer.flightCard) saveQuoteTitle.style.display = 'none'
+            saveQuoteTitle.style.display = saveQuoteContainer.firstChild? 'block' : 'none'
             fetch(`${URL_MAIN}/${flightInfo.id}`, {
                 method: "DELETE",
             });
