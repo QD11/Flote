@@ -215,8 +215,12 @@ hr{
   margin: 20px;
   font-weight: bold;
   text-align: center;
-  transform: skew( 0deg, 343deg);
+  transform: skew( 0deg, 351deg);
   transition: all .5s;
   white-space: nowrap;
+}
+
+.no-data{
+  font-size: 25px;
 }
 
