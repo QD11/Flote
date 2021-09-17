@@ -230,7 +230,7 @@ function initMap() { //Google Map initial function
             map,
             title:  departInfo.name + ` (${departInfo.code})`,
             icon: {                             
-                url: "red_80.png"}
+                url: "icons8-marker-a-80.png"}
         })
 
         arrvMarkerArray[0] = new google.maps.Marker({
@@ -241,7 +241,7 @@ function initMap() { //Google Map initial function
             map,
             title:  arriveInfo.name + ` (${arriveInfo.code})`,
             icon: {                             
-                url: "blue_80.png"}
+                url: "icons8-marker-b-80.png"}
         })
 
         depMarkerArray[0].addListener("mouseover", function() {
