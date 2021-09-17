@@ -22,6 +22,7 @@ const saveQuoteTitle = document.querySelector('#user-saves')
 const selectCities = document.querySelector('#map-cities')
 const quoteBttn = document.querySelector('#quote-bttn')
 const flightPathHolder = []
+const markerAirplaneHolder = []
 
 function initMap() { //Google Map initial function
     const location = { //location of middle of US
@@ -94,6 +95,8 @@ function initMap() { //Google Map initial function
                 selectAirportElement.disabled = false
                 markerArray.forEach(marker => marker.setMap(null))
                 markerArray.length = 0
+                markerAirplaneHolder.forEach(marker => marker.setMap(null))
+                markerAirplaneHolder.length = 0
                 const mapBound2 = new google.maps.LatLngBounds()
                 airPortData.forEach(d => {
                     const airportOption = document.createElement('option')
@@ -223,6 +226,9 @@ function initMap() { //Google Map initial function
             flightPathHolder.length = 0
         }
 
+        markerAirplaneHolder.forEach(marker => marker.setMap(null))
+        markerAirplaneHolder.length = 0
+
         const departInfo = airPortList.find(x => x.code === outboundAirport.value)
         const arriveInfo = airPortList.find(x => x.code === arrivalAirport.value)
 
@@ -235,6 +241,11 @@ function initMap() { //Google Map initial function
             content :  arriveInfo.name + ` (${arriveInfo.code})`
         })
 
+        const infoWindowAirplane = new google.maps.InfoWindow({
+            content : `Distance is ${calcCrow(parseFloat(departInfo.lat), parseFloat(departInfo.lon), parseFloat(arriveInfo.lat), parseFloat(arriveInfo.lon))} miles. Estimated 
+            flight time is ${(calcCrow(parseFloat(departInfo.lat), parseFloat(departInfo.lon), parseFloat(arriveInfo.lat), parseFloat(arriveInfo.lon))/523).toFixed(2)} hours.`
+        })
+
         depMarkerArray[0] = new google.maps.Marker({
             position : {
                 lat : parseFloat(departInfo.lat),
@@ -244,6 +255,16 @@ function initMap() { //Google Map initial function
             title:  departInfo.name + ` (${departInfo.code})`,
             icon: {                             
                 url: "Img/icons8-marker-a-80.png"}
+        })
+
+        const markerAirplane = new google.maps.Marker({
+            position : {
+                lat : (parseFloat(departInfo.lat)+parseFloat(arriveInfo.lat))/2,
+                lng : (parseFloat(departInfo.lon)+parseFloat(arriveInfo.lon))/2
+            },
+            map,
+            icon: {                             
+                url: "Img/iconAirplane.png"}
         })
 
         arrvMarkerArray[0] = new google.maps.Marker({
@@ -262,6 +283,13 @@ function initMap() { //Google Map initial function
         })
         depMarkerArray[0].addListener("mouseout", function() {
             infoWindowDep.close()
+        })
+
+        markerAirplane.addListener("mouseover", function() {
+            infoWindowAirplane.open(map, this)
+        })
+        markerAirplane.addListener("mouseout", function() {
+            infoWindowAirplane.close()
         })
 
         arrvMarkerArray[0].addListener("mouseover", function() {
@@ -285,6 +313,8 @@ function initMap() { //Google Map initial function
 
         addFlightPath(departInfo, arriveInfo)
 
+        markerAirplaneHolder.push(markerAirplane)
+
         function addFlightPath(departInfo, arriveInfo) {
             const flightPlanCoordinates = [
                 { lat: parseFloat(departInfo.lat), lng: parseFloat(departInfo.lon)},
@@ -306,12 +336,30 @@ function initMap() { //Google Map initial function
 
         function removeOtherOptions(parentNode) {
             parentNode.childNodes.forEach(option => {
-                console.log(option.value, parentNode.value)
                 if (option.value != parentNode.value) {
                     option.remove()
                 }
             })
         }
+
+        function calcCrow(lat11, lon11, lat22, lon22) {
+        const R = 6371; // km
+        const dLat = toRad(lat22-lat11);
+        const dLon = toRad(lon22-lon11);
+        const lat1 = toRad(lat11);
+        const lat2 = toRad(lat22);
+
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        const d = R * c * 0.621371; //convert to miles
+        const roundedMile = Math.round(d)
+        return roundedMile;
+        }
+
+        function toRad(Value) {
+        return Value * Math.PI / 180;
+        }
+
     })
 
     function renderInputs(origin, destination, departingDate, returnDate = '') {
