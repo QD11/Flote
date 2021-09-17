@@ -105,10 +105,10 @@ body{
 }
 
 .top-div h1{
-  margin-left: 272px;
+  margin-left: 163px;
   margin-bottom: 0.44;
   white-space: nowrap;
-  margin-right: -151px;
+  margin-right: -242px;
 }
 
 .top-div h3{
@@ -210,12 +210,17 @@ hr{
 }
 
 #app-title h1{
+  font-family: 'playball', cursive;
   font-size: 4em;
   margin: 20px;
   font-weight: bold;
   text-align: center;
+  transform: skew( 0deg, 351deg);
+  transition: all .5s;
+  white-space: nowrap;
 }
 
 .no-data{
-  font-size: 20px;
+  font-size: 25px;
 }
+
