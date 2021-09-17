@@ -168,6 +168,19 @@ function initMap() { //Google Map initial function
         }
     })
 
+    leaveDate.addEventListener('change', event => {
+        const valueLeaveDate = new Date(leaveDate.value)
+        valueLeaveDate.setDate(valueLeaveDate.getDate() + 1)
+        const tomorrowDay = valueLeaveDate.toISOString().slice(0,10)
+        returnDate.min = tomorrowDay
+        // if (returnDate.value) {
+        //     if( (new Date(returnDate.value).getTime() < new Date(tomorrowDay).getTime())) {
+        //         console.log('yeet')
+        //         returnDate.value == tomorrowDay
+        //     }
+        // }
+    })
+
     quoteForm.addEventListener('submit', event => {
         event.preventDefault()
         renderInputs(outboundAirport.value, arrivalAirport.value, leaveDate.value, returnDate.value)

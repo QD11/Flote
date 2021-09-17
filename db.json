@@ -41,7 +41,56 @@
       "image": "https://1000logos.net/wp-content/uploads/2021/04/Allegiant-Air-logo-768x432.png"
     }
   ],
-  "userquotes": [],
+  "userquotes": [
+    {
+      "nameDep": "Alaska Airlines",
+      "nameRet": "",
+      "cities": "Houston (HOU) ✈ San Francisco (SFO)",
+      "imgDep": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
+      "imgRet": "",
+      "price": 301,
+      "departure": "2021-09-17",
+      "arrival": "",
+      "direct": "Connecting Flight",
+      "id": 1
+    },
+    {
+      "nameDep": "Alaska Airlines",
+      "nameRet": "",
+      "cities": "Houston (HOU) ✈ San Francisco (SFO)",
+      "imgDep": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Alaska_Airlines_logo.svg",
+      "imgRet": "",
+      "price": 301,
+      "departure": "2021-09-17",
+      "arrival": "",
+      "direct": "Connecting Flight",
+      "id": 2
+    },
+    {
+      "nameDep": "Spirit Airlines",
+      "nameRet": "",
+      "cities": "Houston (IAH) ✈ San Francisco (SFO)",
+      "imgDep": "https://upload.wikimedia.org/wikipedia/commons/6/69/Spirit_Airlines_logo.svg",
+      "imgRet": "",
+      "price": 209,
+      "departure": "2021-09-17",
+      "arrival": "",
+      "direct": "Connecting Flight",
+      "id": 3
+    },
+    {
+      "nameDep": "United",
+      "nameRet": "",
+      "cities": "Houston (IAH) ✈ San Francisco (SFO)",
+      "imgDep": "https://upload.wikimedia.org/wikipedia/en/e/e0/United_Airlines_Logo.svg",
+      "imgRet": "",
+      "price": 357,
+      "departure": "2021-09-17",
+      "arrival": "",
+      "direct": "Direct Flight",
+      "id": 4
+    }
+  ],
   "airports": [
     {
       "code": "ABE",
