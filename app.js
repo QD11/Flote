@@ -93,21 +93,22 @@ function initMap() { //Google Map initial function
         const depStateShort = depCityValue.split(",")[1].slice(1)
         const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
         const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
-        const airportOption = document.createElement('option')
-        
+        console.log(airPortData)
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
         }
 
         if(airPortData.length === 0){
-            console.log('k')
-            airportOption.textContent = `No Airports In ${depCity} ${depState}`
-            selectAirportElement.appendChild(airportOption)
-        }else{     
+            selectAirportElement.disabled = true
+            const showNoAirport = document.createElement('option')
+            showNoAirport.textContent = `No Airports In ${depCity} ${depState}`
+            selectAirportElement.appendChild(showNoAirport)
+        }else{   
+                selectAirportElement.disabled = false  
                 markerArray.forEach(marker => marker.setMap(null))
                 airPortData.forEach(d => {
-                    
-                    airportOption.textContent = d.name + ` (${d.code})`
+                    const airportOption = document.createElement('option')
+                    airportOption.textContent = d.name + ` (${d.code})`                
                     airportOption.value = d.code
                     selectAirportElement.appendChild(airportOption)   
                     const marker = new google.maps.Marker({

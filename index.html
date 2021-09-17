@@ -18,33 +18,35 @@
 </head>
 <body>
     <div>
-        <div id=flight-form-container>
-            <!-- flight-form container -->
-            <form id='flight-form'>
-                <label for="departing-city">Departing City</label>
-                <input type="text" id='departing-city'>
-                <label for="outbound-terminal">Departing Airport: </label>
-                <!-- <input type="text" name="outbound-terminal" id="outbound-terminal">  -->
-                <select name="outbound-terminal" id="outbound-terminal"></select>
-                <!-- <input type="text" name="arrival-terminal" id="arrival-terminal"> <br> -->
-                <label for="departing-date">Departing Date: </label>
-                <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
-                min="2021-09-13">
-                <br>
-                <label for="arriving-city">Arriving City</label>
-                <input type="text" id="arriving-city">
-                <label for="arrival-terminal">Arriving Airport: </label>
-                <select name="arrival-terminal" id="arrival-terminal"></select>
-                <label for="returning-date">Returning Date: </label>
-                <input type="date" name='return-date' id='return-date' disabled="disabled">
-                <br>
-                <label for="round-trip">Round Trip: </label>
-                <input type="checkbox" id="round-trip" name="round-trip">
-                <br>
-                <button id='quote-bttn'>Get Quotes</button> 
-            </form>
-        </div>
-        <div id="map"></div>
+            <div id=flight-form-container>
+                <!-- flight-form container -->
+                <form id='flight-form'>
+                    <label for="departing-city">Departing City</label>
+                    <input type="text" id='departing-city'>
+                    <label for="outbound-terminal">Departing Airport: </label>
+                    <!-- <input type="text" name="outbound-terminal" id="outbound-terminal">  -->
+                    <select name="outbound-terminal" id="outbound-terminal" style="width: 400px" disabled="disabled"></select>
+                    <!-- <input type="text" name="arrival-terminal" id="arrival-terminal"> <br> -->
+                    <label for="departing-date">Departing Date: </label>
+                    <input type="date" name="leave-date" id="leave-date" value="2021-09-13"
+                    min="2021-09-13">
+                    <br>
+                    <label for="arriving-city">Arriving City</label>
+                    <input type="text" id="arriving-city">
+                    <label for="arrival-terminal">Arriving Airport: </label>
+                    <select name="arrival-terminal" id="arrival-terminal" disabled="disabled"></select>
+                    <label for="returning-date">Returning Date: </label>
+                    <input type="date" name='return-date' id='return-date' disabled="disabled">
+                    <br>
+                    <div>
+                        <label for="round-trip">Round Trip: </label>
+                        <input type="checkbox" id="round-trip" name="round-trip">
+                    </div>  
+                    <br>
+                    <button id='quote-bttn'>Get Quotes</button> 
+                </form>
+                <div id="map"></div>
+        </div>  
         <!-- we render flight quotes here for now -->
         <div id=flight-render-container></div>
         <div id='user-saves'>USER SAVES</div>
