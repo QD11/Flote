@@ -66,12 +66,12 @@ function initMap() { //Google Map initial function
     
 
     function grabAirportData(cityElement, autoComplete, selectAirportElement, markerArray, path){
-        const depCityVal = autoComplete.getPlace()
-        const depCityValue = cityElement.value
-        const depCity = depCityValue.split(",")[0]
-        const depStateShort = depCityValue.split(",")[1].slice(1)
-        const depState = depCityVal.address_components.filter(s => s.short_name === depStateShort)[0].long_name
-        const airPortData = airPortList.filter(i => i.city === depCity && i.state === depState)
+        const CityVal = autoComplete.getPlace()
+        const CityValue = cityElement.value
+        const City = CityValue.split(",")[0]
+        const StateShort = CityValue.split(",")[1].slice(1)
+        const State = CityVal.address_components.filter(s => s.short_name === StateShort)[0].long_name
+        const airPortData = airPortList.filter(i => i.city === City && i.state === State)
 
         while (selectAirportElement.firstChild) {
             selectAirportElement.removeChild(selectAirportElement.firstChild);
@@ -80,7 +80,7 @@ function initMap() { //Google Map initial function
         if(airPortData.length === 0){
             selectAirportElement.disabled = true
             const showNoAirport = document.createElement('option')
-            showNoAirport.textContent = `No Airports In ${depCity} ${depState}`
+            showNoAirport.textContent = `No Airports In ${City} ${State}`
             selectAirportElement.appendChild(showNoAirport)
         }
         else{   
@@ -270,7 +270,7 @@ function initMap() { //Google Map initial function
             const flightInfo = {
                 nameDep : flightIdDep,
                 nameRet : flightIdRet,
-                cities: cityDep + ' ✈ ' + cityArr,
+                cities: cityDep + ` (${outboundAirport.value})` + ' ✈ ' + cityArr + ` (${arrivalAirport.value})`,
                 imgDep : imgLinkDep,
                 imgRet : imgLinkRet,
                 price : flightPrice,
