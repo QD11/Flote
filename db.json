@@ -41,6 +41,7 @@
       "image": "https://1000logos.net/wp-content/uploads/2021/04/Allegiant-Air-logo-768x432.png"
     }
   ],
+<<<<<<< HEAD
   "userquotes": [
     {
       "nameDep": "Alaska Airlines",
@@ -55,6 +56,9 @@
       "id": 2
     }
   ],
+=======
+  "userquotes": [],
+>>>>>>> f5e6b2f717a6d496404f3dc7df30f3cbc9d560a2
   "airports": [
     {
       "code": "ABE",

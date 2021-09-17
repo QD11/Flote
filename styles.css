@@ -220,7 +220,19 @@ hr{
   white-space: nowrap;
 }
 
+#app-title h1{
+  font-family: 'playball', cursive;
+  font-size: 4em;
+  margin: 20px;
+  font-weight: bold;
+  text-align: center;
+  transform: skew( 0deg, 351deg);
+  transition: all .5s;
+  white-space: nowrap;
+}
+
 .no-data{
-  font-size: 25px;
+  font-size: 29px;
+  margin-bottom: 35px;
 }
 
