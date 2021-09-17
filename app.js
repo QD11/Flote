@@ -108,7 +108,7 @@ function initMap() { //Google Map initial function
                         map,
                         title:  d.name + ` (${d.code})`,
                         icon: {                             
-                            url: "blue_48.png",
+                            url: "Img/blue_48.png",
                         }
                     }) : 
                     new google.maps.Marker({
@@ -119,7 +119,7 @@ function initMap() { //Google Map initial function
                         map,
                         title:  d.name + ` (${d.code})`,
                         icon: {                             
-                            url: "red_48.png",
+                            url: "Img/red_48.png",
                         }
                     })
                     const infoWindow = new google.maps.InfoWindow({
@@ -128,13 +128,13 @@ function initMap() { //Google Map initial function
                     marker.addListener("mouseover", function() {
                         infoWindow.open(map, this)
                         marker.setIcon({
-                            url: (path==="arrive"? "blue_80.png":"red_80.png"),
+                            url: (path==="arrive"? "Img/blue_80.png":"Img/red_80.png"),
                         })
                     })
                     marker.addListener("mouseout", function() {
                         infoWindow.close()
                         marker.setIcon({
-                            url: (path==="arrive"? "blue_48.png":"red_48.png"),
+                            url: (path==="arrive"? "Img/blue_48.png":"Img/red_48.png"),
                         })
                     })
                     markerArray.push(marker)
@@ -243,7 +243,7 @@ function initMap() { //Google Map initial function
             map,
             title:  departInfo.name + ` (${departInfo.code})`,
             icon: {                             
-                url: "icons8-marker-a-80.png"}
+                url: "Img/icons8-marker-a-80.png"}
         })
 
         arrvMarkerArray[0] = new google.maps.Marker({
@@ -254,7 +254,7 @@ function initMap() { //Google Map initial function
             map,
             title:  arriveInfo.name + ` (${arriveInfo.code})`,
             icon: {                             
-                url: "icons8-marker-b-80.png"}
+                url: "Img/icons8-marker-b-80.png"}
         })
 
         depMarkerArray[0].addListener("mouseover", function() {
@@ -401,11 +401,11 @@ function initMap() { //Google Map initial function
 
         const flightImgDep = document.createElement('img')
         flightImgDep.className = 'flight-image'
-        flightImgDep.src =  flightInfo.imgDep ? flightInfo.imgDep : "depAirplane.png"
+        flightImgDep.src =  flightInfo.imgDep ? flightInfo.imgDep : "Img/depAirplane.png"
 
         const flightImgRet = document.createElement('img')
         flightImgRet.className = 'flight-image'
-        flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : "arrAirplane.png"
+        flightImgRet.src =  flightInfo.imgRet ? flightInfo.imgRet : "Img/arrAirplane.png"
 
         const flightNameDep = document.createElement('h1')
         flightNameDep.textContent = flightInfo.nameDep
