@@ -39,13 +39,13 @@ body{
 }
 
 #flight-form{
-  margin: 48px;
-  margin-top: 45px;
-  background-color: rgb(244 244 244 / 78%);
-  box-shadow: inset -1px 1px 5px black;
-  padding: 44px;
-  display: inline-flex;
-  flex-direction: column;
+    margin: 48px;
+    margin-top: 32px;
+    background-color: rgb(244 244 244 / 78%);
+    box-shadow: inset -1px 1px 5px black;
+    padding: 44px;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 #flight-form-container{
@@ -100,6 +100,7 @@ body{
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  margin-top: 25px;
 }
 
 .top-div h1{
@@ -188,8 +189,8 @@ hr{
 
 
 #map {
-  height: 646px;
-  width: 58%;
+  height: 559px;
+  width: 56%;
   margin-left: 11px;
   margin-right: auto;
   margin-bottom: 25px;
