@@ -7,6 +7,7 @@ body{
 #quote-bttn {
   background-color: #000000;
   color: #FFFFFF;
+  opacity: 0.3;
   font-size: 15px;
   padding: 18px;
   border-radius: 10px;
@@ -208,3 +209,13 @@ hr{
   margin-bottom: 10px;
 }
 
+#app-title h1{
+  font-size: 4em;
+  margin: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.no-data{
+  font-size: 20px;
+}

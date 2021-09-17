@@ -20,6 +20,7 @@ const roundTrip = document.querySelector('#round-trip')
 const saveQuoteContainer = document.querySelector('#saved-quotes-container')
 const saveQuoteTitle = document.querySelector('#user-saves')
 const selectCities = document.querySelector('#map-cities')
+const quoteBttn = document.querySelector('#quote-bttn')
 
 function initMap() { //Google Map initial function
     const location = { //location of middle of US
@@ -124,6 +125,16 @@ function initMap() { //Google Map initial function
                     map.fitBounds(mapBound2);       
                     map.panToBounds(mapBound2);    
                 })
+                
+                if(selectDepAirport.value && selectArrvAirport.value){
+                    quoteBttn.disabled = false
+                    quoteBttn.style.background = "black"; 
+                    quoteBttn.style.color = "white"
+                    quoteBttn.style.opacity = "1"
+                }else{                      
+                    quoteBttn.disabled = true
+                    quoteBttn.style.opacity = "0.3"
+                }
             }
         }
     
@@ -222,7 +233,7 @@ function initMap() { //Google Map initial function
         }
         if (data.Quotes.length === 0){
             const noData = document.createElement('h1')
-            noData.innerText = 'NO QUOTES AVAILABLE'
+            noData.innerText = 'NO Tickets AVAILABLE'
             flightContainer.appendChild(noData)
         }
         else {
@@ -323,7 +334,7 @@ function initMap() { //Google Map initial function
 
         const saveBttn = document.createElement('button')
         saveBttn.id = 'save-button'
-        saveBttn.textContent = 'Save Quote!'
+        saveBttn.textContent = 'Save Ticket!'
         saveBttn.addEventListener('click', (event) => {
             fetch(URL_MAIN, {
                 method: "POST",
@@ -339,7 +350,7 @@ function initMap() { //Google Map initial function
             saveQuoteTitle.style.display = 'block'
             const delBttn = document.createElement('button')
             delBttn.id = 'del-button'
-            delBttn.textContent = 'Delete Quote'
+            delBttn.textContent = 'Delete Ticket'
             delBttn.addEventListener('click', () => {
                 delQuote(flightInfo)
             })
@@ -350,7 +361,7 @@ function initMap() { //Google Map initial function
 
         const delBttn = document.createElement('button')
         delBttn.id = 'del-button'
-        delBttn.textContent = 'Delete Quote'
+        delBttn.textContent = 'Delete Ticket'
         delBttn.addEventListener('click', () => {
             delQuote(flightInfo)
         })
