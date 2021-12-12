@@ -1,5 +1,6 @@
-# Flote                                                                      live- https://qd11.github.io/Flote/ (SkySaver API is currently inactive, view below for demo)
+# Flote                                                                      
 
+live- https://qd11.github.io/Flote/ (SkySaver API is currently inactive, view below for demo)
 
 This is an interactive application where the user can pick two places and get provided with a ticket (if there is one).
 App built with pure Javascript, external API SkySaver and Google API (places/directions)
